@@ -41,3 +41,53 @@ o	Don’t use magic numbers (i.e., non-obvious values that aren’t declared as 
 All these requirements should be fulfilled in a meaningful way. Ask the professor if you are not sure whether what you have is meaningless or not.
 
 A presentation is due at the end of the project (see syllabus). Any member of a group that does not demonstrate knowledge of the code contributed in his project might have his grade decreased accordingly.
+
+## GitHub Workflow
+
+Whenever you start working on something new create a new branch.
+
+git checkout -b new-feature
+^
+This creates a new branch titled new-feature
+
+----------------------------------------------------------------------------------------------
+
+Then you make your changes
+
+----------------------------------------------------------------------------------------------
+
+git add .
+^
+This adds all changed files to the staging area
+
+----------------------------------------------------------------------------------------------
+
+git commit -m "description-of-what-was-added"
+^
+This creates a commit with the message "description-of-what-was-added"
+
+----------------------------------------------------------------------------------------------
+
+Then push to a remote branch. Up to this point, the branch you have been working on is only on your local machine.
+
+----------------------------------------------------------------------------------------------
+
+git push -u origin new-feature
+^
+This pushes your branch (change new-feature to whatever your branch is named) to the origin (the github repo)
+
+----------------------------------------------------------------------------------------------
+
+In the output of the git push command there will be a link to create a merge request. Go to this link. Click create pull request. That will take you to another page. Here it will tell you whether or not there are any merge conflicts. If there are none go ahead and merge! Once you've merged successfully click delete branch!
+
+----------------------------------------------------------------------------------------------
+
+When you navigate back to your local repo, you will still be on the branch that you created, to get back to the main branch, type "git checkout main". Then you can type "git branch -d new-feature" to delete the branch from your local repo (this is not necessary but it is good to delete it because it is not needed).
+
+----------------------------------------------------------------------------------------------
+
+I know this is a bit complex but it will help prevent us from having bad merge conflicts and this is how you will use git in your jobs so its good experience! If you have any questions don't hesitate to reach out. I'm still learning as well but I will help in any way I can!
+
+Here is a link to a video demonstrating the process: //todo: make video 
+
+
