@@ -46,7 +46,7 @@ A presentation is due at the end of the project (see syllabus). Any member of a 
 
 Whenever you start working on something new create a new branch.
 
-git checkout -b new-feature
+git checkout -b new-feature<br/>
 ^
 This creates a new branch titled new-feature
 
@@ -56,25 +56,25 @@ Then you make your changes
 
 ----------------------------------------------------------------------------------------------
 
-git add .
+git add .<br/>
 ^
 This adds all changed files to the staging area
 
 ----------------------------------------------------------------------------------------------
 
-git commit -m "description-of-what-was-added"
+git commit -m "description-of-what-was-added"<br/>
 ^
 This creates a commit with the message "description-of-what-was-added"
 
 ----------------------------------------------------------------------------------------------
 
-Then push to a remote branch. Up to this point, the branch you have been working on is only on your local machine.
+Then push to the remote branch (ie github repo). Up to this point, the branch you have been working on is only on your local machine.
 
 ----------------------------------------------------------------------------------------------
 
-git push -u origin new-feature
+git push -u origin new-feature <br/>
 ^
-This pushes your branch (change new-feature to whatever your branch is named) to the origin (the github repo)
+This pushes your branch (here new-feature is whatever your branch is named) to the origin (the github repo)
 
 ----------------------------------------------------------------------------------------------
 
@@ -86,7 +86,7 @@ When you navigate back to your local repo, you will still be on the branch that 
 
 ----------------------------------------------------------------------------------------------
 
-I know this is a bit complex but it will help prevent us from having bad merge conflicts and this is how you will use git in your jobs so its good experience! If you have any questions don't hesitate to reach out. I'm still learning as well but I will help in any way I can!
+I know this is a bit complex but it will help prevent us from having bad merge conflicts and this is how you will use git in your jobs so its good experience! If you have any questions don't hesitate to reach out. I'm still learning as well but I will help in any way I can!<br/>
 
 Here is a link to a video demonstrating the process: //todo: make video 
 
