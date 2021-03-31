@@ -1,6 +1,8 @@
 <?php
     include "../db/DatabaseAdapterMySQLI.class.php";
     include "../db/TaskDAO.class.php";
+    // Displays output as JSON in prettyprint
+    header('Content-Type: application/json');
 
     $connectionValues = array("localhost", "root", "root", "to_do_list");
 
