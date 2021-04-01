@@ -1,48 +1,42 @@
 package com.example.todolist
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.ListView
+import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        /*
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_main)
-            // Initializing the array lists and the adapter
-            var itemlist = arrayListOf<String>()
-            var adapter = ArrayAdapter<String>(
-                this,
-                android.R.layout.simple_list_item_multiple_choice, itemlist
-            )
+        val arrayAdapter: ArrayAdapter<*>
+        val tasks = arrayOf("Pass Advanced Internet Concepts", "Buy face care stuff", "Buy Jackie a heat lamp", "Bake a cake", "Move in to new house")
 
-            FloatingActionButton add = (FloatingActionButton)
-            findViewById(R.id.add);
-            add.bringToFront();
+        // access the listView from xml file
+        var tasksList = findViewById<ListView>(R.id.tasksList)
+        arrayAdapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, tasks)
+        tasksList.adapter = arrayAdapter
 
-            // Adding the items to the list when the add button is pressed
-            add.setOnClickListener(new View.OnClickListener() {
-
-
-                itemlist.add(addNewItem.text.toString())
-                listView.adapter = adapter
-                adapter.notifyDataSetChanged()
-                // This is because every time when you add the item the input space or the eidt text space will be cleared
-                editText.text.clear()
-            }
-            // Clearing all the items in the list when the clear button is pressed
-            clear.setOnClickListener {
-
-                itemlist.clear()
-                adapter.notifyDataSetChanged()
-            }
+        // When the user presses the add button they are redirected
+        // to the "Add a New Task" page. On this page the user can
+        // add a new task and add the description.
+        val add = findViewById<FloatingActionButton>(R.id.add)
+        add.setOnClickListener{
+            val intent = Intent(this, taskDescription::class.java)
+            startActivity(intent)
         }
-        *
-         */
+
+        // Delete button
+        val delete = findViewById<FloatingActionButton>(R.id.delete)
+        delete.setOnClickListener {
+            // We are showing only toast message. However, you can do anything you need.
+            Toast.makeText(applicationContext, "This is the delete button", Toast.LENGTH_SHORT).show()
+        }
     }
 }
