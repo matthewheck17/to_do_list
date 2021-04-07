@@ -9,5 +9,4 @@
     $adapter = new databaseAdapterMySQLI($connectionValues);
     $userDAO = new TaskDAO($adapter);
     $resultArr = $userDAO->findAll();
-    //$resultArr = $userDAO->findByID(2); This also works example
     echo json_encode($resultArr);
