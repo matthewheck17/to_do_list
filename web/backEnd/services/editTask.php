@@ -17,12 +17,4 @@ if (!$taskDAO->findByID($_GET['id'])) { //if the id does not exist in the DB
     $updatedTask = new Task($_GET['id'], $_GET['title'], $_GET['content'], $_GET['completed']);
     $taskDAO->update($updatedTask);
 }
-
-
-// echo "<script>console.log('" . $_GET['title'] ."')</script>";
-// echo "<script>console.log('" . $_GET['content'] ."')</script>";
-// echo "<script>console.log('" . $_GET['completed'] ."')</script>";
-
-//$resultArr = $userDAO->findByID($_GET['id']);
-//echo json_encode($resultArr);
 ?>
