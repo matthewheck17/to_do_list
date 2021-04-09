@@ -37,7 +37,7 @@ abstract class DAO
 
   public function insert($object) {
     $sql = $this->getInsertStatement($object);
-    $this->dbAdapter->runQuery($sql);
+    return $this->dbAdapter->runQueryGetLastInsertID($sql); //returns id of most recent insert
   }
 
   public function update($object) {

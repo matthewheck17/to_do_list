@@ -1,6 +1,4 @@
 <?php
-// Used for JSON pretty print
-//header('Content-Type: application/json');
 
 require_once("../db/DatabaseAdapterMySQLI.class.php");
 require_once("../db/TaskDAO.class.php");
@@ -12,7 +10,7 @@ $adapter = new databaseAdapterMySQLI($connectionValues);
 $taskDAO = new TaskDAO($adapter);
 
 if (!$taskDAO->findByID($_GET['id'])) { //if the id does not exist in the DB
-    header($_SERVER["SERVER_PROTOCOL"]." 404 Not Found");
+    http_response_code(404);
 } else {
     $updatedTask = new Task($_GET['id'], $_GET['title'], $_GET['content'], $_GET['completed']);
     $taskDAO->update($updatedTask);
