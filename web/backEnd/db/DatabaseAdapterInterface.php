@@ -5,6 +5,7 @@
     function setConnectionInfo($values=array());
     function runQuery($sql);
     function fetchAsArray($sql);
+    function runQueryGetLastInsertID($sql);
   }
 
 ?>

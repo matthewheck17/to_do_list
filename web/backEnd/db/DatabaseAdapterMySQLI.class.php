@@ -22,7 +22,7 @@ class DatabaseAdapterMySQLI implements DatabaseAdapterInterface
   
 
   public function runQuery($sql) {
-    $result = $this->mysqli->query($sql); //run query
+    $result = $this->mysqli->query($sql);
     return $result;
   }
 
@@ -33,6 +33,12 @@ class DatabaseAdapterMySQLI implements DatabaseAdapterInterface
       array_push($resultArr, $row);
     }
     return $resultArr;
+  }
+
+  public function runQueryGetLastInsertID($sql) {
+    $this->mysqli->query($sql);
+    $id = mysqli_insert_id($this->mysqli); //get id of most recent insert
+    return $id;
   }
 
 }
