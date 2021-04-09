@@ -19,7 +19,9 @@ abstract class DAO
 
   // The insert statement for the table
   abstract protected function getInsertStatement($object);
-  
+
+  // The insert statement for the table
+  abstract protected function getUpdateStatement($object);
   
   public function findAll() {
     $sql = $this->getSelectStatement();
@@ -35,6 +37,11 @@ abstract class DAO
 
   public function insert($object) {
     $sql = $this->getInsertStatement($object);
+    $this->dbAdapter->runQuery($sql);
+  }
+
+  public function update($object) {
+    $sql = $this->getUpdateStatement($object);
     $this->dbAdapter->runQuery($sql);
   }
 }
