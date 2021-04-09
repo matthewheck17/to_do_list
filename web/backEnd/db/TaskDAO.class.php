@@ -1,6 +1,7 @@
 <?php
 
-include "DAO.class.php";
+require_once("DAO.class.php");
+require_once("../data-classes/Task.class.php");
 
 class TaskDAO extends DAO {
 
@@ -23,9 +24,13 @@ class TaskDAO extends DAO {
         }
     }
 
-    protected function getUpdateTaskStatement($taskObj)
+    protected function getUpdateStatement($taskObj)
     {
-        //TODO
+        if (is_a($taskObj, 'Task')){
+            return 'UPDATE tasks SET title = "' . $taskObj->getTitle() .'", content = "' . $taskObj->getContent() .'", completed = "' . $taskObj->getCompleted() .'" WHERE task_id="' . $taskObj->getID() .'"';
+        } else {
+            throw new Exception('Is not a task object');
+        }
     }
 
 

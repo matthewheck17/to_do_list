@@ -6,16 +6,14 @@ class Task {
     private $content;
     private $completed;
 
-    public function __construct($title, $content) {
+    public function __construct($task_id, $title, $content, $completed) {
+        $this->task_id = $task_id;
         $this->title = $title;
         $this->content = $content;
+        $this->completed = $completed;
     }
 
-    public function setTaskID(){
-        $this->task_id = $task_id;
-    }
-
-    public function getTaskID(){
+    public function getID(){
         return $this->task_id;
     }
 

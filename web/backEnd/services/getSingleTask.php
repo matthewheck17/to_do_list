@@ -8,8 +8,8 @@ include "../db/TaskDAO.class.php";
 $connectionValues = array("localhost", "root", "root", "to_do_list");
 
 $adapter = new databaseAdapterMySQLI($connectionValues);
-$userDAO = new TaskDAO($adapter);
+$taskDAO = new TaskDAO($adapter);
 
-$resultArr = $userDAO->findByID($_GET['id']);
+$resultArr = $taskDAO->findByID($_GET['id']);
 echo json_encode($resultArr);
 ?>
