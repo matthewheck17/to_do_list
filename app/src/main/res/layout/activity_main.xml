@@ -19,7 +19,6 @@
         android:textColor="@color/teal_700"
         android:textSize="26dp" />
 
-
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
@@ -46,7 +45,10 @@
         android:layout_marginEnd="18dp"
         android:layout_marginRight="18dp"
         android:layout_marginBottom="62dp"
-        android:choiceMode="multipleChoice" />
+        android:choiceMode="multipleChoice"
+        />
+
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/delete"
