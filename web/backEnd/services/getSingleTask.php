@@ -9,7 +9,13 @@ $connectionValues = array("localhost", "root", "root", "to_do_list");
 
 $adapter = new databaseAdapterMySQLI($connectionValues);
 $taskDAO = new TaskDAO($adapter);
-
-$resultArr = $taskDAO->findByID($_GET['id']);
-echo json_encode($resultArr);
+// If the ID exists in the database, send the HTTP request and display the JSON results
+if ($taskDAO->findByID($_GET['id'])) {
+  http_response_code(200);
+  $resultArr = $taskDAO->findByID($_GET['id']);
+  echo json_encode($resultArr);
+// Else, send the following HTTP request
+} else {
+  http_response_code(404);
+}
 ?>
