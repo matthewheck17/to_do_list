@@ -7,7 +7,7 @@ include "../db/TaskDAO.class.php";
 
 $connectionValues = array("localhost", "root", "root", "to_do_list");
 
-$adapter = new databaseAdapterMySQLI($connectionValues);
+$adapter = new DatabaseAdapterMySQLI($connectionValues);
 $taskDAO = new TaskDAO($adapter);
 // If the ID exists in the database, send the HTTP request and display the JSON results
 if ($taskDAO->findByID($_GET['id'])) {
