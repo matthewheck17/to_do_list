@@ -8,15 +8,18 @@ require_once("../data-classes/Task.class.php");
 
 $connectionValues = array("localhost", "root", "root", "to_do_list");
 
-$adapter = new databaseAdapterMySQLI($connectionValues);
+$adapter = new DatabaseAdapterMySQLI($connectionValues);
 $taskDAO = new TaskDAO($adapter);
 
-if (isset($_GET['title']) && isset($_GET['content'])) { //check that the title and content are provided in the query string
-    $newTask = new Task(null, $_GET['title'], $_GET['content'], null);
+$json = file_get_contents('php://input');  // Takes raw data from the request
+$data = json_decode($json); // Converts it into a PHP object
+
+if (isset($data->title) && isset($data->content)) { //check that the title and content are set
+    $newTask = new Task(null, $data->title, $data->content, null);
     $resultID = $taskDAO->insert($newTask);
     $resultArr = $taskDAO->findByID($resultID);
     echo json_encode($resultArr);
 } else {
-    http_response_code(400);
+    http_response_code(404);
 }
 ?>

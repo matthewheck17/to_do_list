@@ -6,7 +6,7 @@ require_once("../data-classes/Task.class.php");
 
 $connectionValues = array("localhost", "root", "root", "to_do_list");
 
-$adapter = new databaseAdapterMySQLI($connectionValues);
+$adapter = new DatabaseAdapterMySQLI($connectionValues);
 $taskDAO = new TaskDAO($adapter);
 
 if (!$taskDAO->findByID($_GET['id'])) { //if the id does not exist in the DB

@@ -6,7 +6,7 @@
 
     $connectionValues = array("localhost", "root", "root", "to_do_list");
 
-    $adapter = new databaseAdapterMySQLI($connectionValues);
+    $adapter = new DatabaseAdapterMySQLI($connectionValues);
     $taskDAO = new TaskDAO($adapter);
     $resultArr = $taskDAO->findAll();
     // If the database is empty, throw the corresponding response code
