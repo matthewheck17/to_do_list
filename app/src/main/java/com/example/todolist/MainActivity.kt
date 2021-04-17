@@ -6,14 +6,78 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
+import com.android.volley.Request
+import com.android.volley.Response
+import org.json.JSONException
+import org.json.JSONObject
 import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
+    var listView: ListView? = null
+    var tasksList: MutableList<Task>? = null
+    val add = findViewById<FloatingActionButton>(R.id.add)
+
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.activity_main)
+
+            listView = findViewById(R.id.tasksList) as ListView
+            tasksList = mutableListOf<Task>()
+            loadTasks()
+
+        add.setOnClickListener {
+            val intent = Intent(this, taskDescription::class.java)
+            startActivity(intent)
+        }
+        }
+
+         fun loadTasks() {
+            val stringRequest = StringRequest(Request.Method.GET,
+                EndPoints.URL_GET_TASK,
+                { s ->
+                    try {
+                        val obj = JSONObject(s)
+
+                            val array = obj.getJSONArray("tasks")
+
+                            for (i in 0..array.length() - 1) {
+                                val objectTask = array.getJSONObject(i)
+                                val task = Task(
+                                    objectTask.getString("title"),
+                                    objectTask.getString("content")
+                                )
+                                tasksList!!.add(task)
+                                val adapter = TaskList(this@MainActivity, tasksList!!)
+                                listView!!.adapter = adapter
+                            }
+
+                            Toast.makeText(
+                                getApplicationContext(),
+                                obj.getString("message"),
+                                Toast.LENGTH_LONG
+                            ).show()
+
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                },
+                { volleyError ->
+                    Toast.makeText(
+                        applicationContext,
+                        volleyError.message,
+                        Toast.LENGTH_LONG
+                    ).show()
+                })
+
+            val requestQueue = Volley.newRequestQueue(this)
+            requestQueue.add<String>(stringRequest)
+        }
+    }
+        /*
 
         val arrayAdapter: ArrayAdapter<*>
         val tasks = arrayOf(
@@ -44,7 +108,7 @@ class MainActivity : AppCompatActivity() {
         // When the user presses the add button they are redirected
         // to the "Add a New Task" page. On this page the user can
         // add a new task and add the description.
-        fun addTask() {
+        fun addMe() {
             val add = findViewById<FloatingActionButton>(R.id.add)
             add.setOnClickListener {
                 val intent = Intent(this, taskDescription::class.java)
@@ -56,9 +120,11 @@ class MainActivity : AppCompatActivity() {
         fun deleteTask() {
             val delete = findViewById<FloatingActionButton>(R.id.delete)
             delete.setOnClickListener {
-                // We are showing only toast message. However, you can do anything you need.
+                // Message
                 Toast.makeText(applicationContext, "This is the delete button", Toast.LENGTH_SHORT).show()
             }
         }
     }
 }
+*
+         */
