@@ -19,32 +19,31 @@ class MainActivity : AppCompatActivity() {
 
     var listView: ListView? = null
     var tasksList: MutableList<Task>? = null
-    val add = findViewById<FloatingActionButton>(R.id.add)
 
     override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_main)
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-            listView = findViewById(R.id.tasksList) as ListView
-            tasksList = mutableListOf<Task>()
-            loadTasks()
+        listView = findViewById<ListView>(R.id.tasksList)
+        tasksList = mutableListOf<Task>()
+        loadTasks()
 
+        val add = findViewById<FloatingActionButton>(R.id.add)
         add.setOnClickListener {
             val intent = Intent(this, taskDescription::class.java)
             startActivity(intent)
         }
         }
 
-         fun loadTasks() {
+         private fun loadTasks() {
             val stringRequest = StringRequest(Request.Method.GET,
                 EndPoints.URL_GET_TASK,
                 { s ->
                     try {
                         val obj = JSONObject(s)
-
                             val array = obj.getJSONArray("tasks")
 
-                            for (i in 0..array.length() - 1) {
+                            for (i in 0 until array.length()) {
                                 val objectTask = array.getJSONObject(i)
                                 val task = Task(
                                     objectTask.getString("title"),
@@ -54,14 +53,8 @@ class MainActivity : AppCompatActivity() {
                                 val adapter = TaskList(this@MainActivity, tasksList!!)
                                 listView!!.adapter = adapter
                             }
-
-                            Toast.makeText(
-                                getApplicationContext(),
-                                obj.getString("message"),
-                                Toast.LENGTH_LONG
-                            ).show()
-
-                    } catch (e: JSONException) {
+                    }
+                    catch (e: JSONException) {
                         e.printStackTrace()
                     }
                 },

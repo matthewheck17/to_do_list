@@ -32,8 +32,12 @@ class taskDescription : AppCompatActivity() {
 
         //adding a click listener to button
         val save = findViewById<Button>(R.id.saveButton)
+
         save.setOnClickListener {
             addTask()
+        }
+
+        save.setOnClickListener {
             val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
         }
@@ -57,16 +61,12 @@ class taskDescription : AppCompatActivity() {
                     e.printStackTrace()
                 }
             },
-            object : Response.ErrorListener {
-                override fun onErrorResponse(volleyError: VolleyError) {
-                    Toast.makeText(applicationContext, volleyError.message, Toast.LENGTH_LONG).show()
-                }
-            }) {
+            Response.ErrorListener { volleyError -> Toast.makeText(applicationContext, volleyError.message, Toast.LENGTH_LONG).show() }) {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 val params = HashMap<String, String>()
-                params.put("title", title)
-                params.put("content", content)
+                params["title"] = title
+                params["content"] = content
                 return params
             }
         }
