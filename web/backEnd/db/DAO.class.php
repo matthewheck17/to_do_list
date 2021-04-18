@@ -44,4 +44,9 @@ abstract class DAO
     $sql = $this->getUpdateStatement($object);
     $this->dbAdapter->runQuery($sql);
   }
+
+  public function delete($id) {
+    $sql = $this->getDeleteStatement($id);
+    $this->dbAdapter->runQuery($sql);
+  }
 }
