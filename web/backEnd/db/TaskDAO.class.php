@@ -33,5 +33,10 @@ class TaskDAO extends DAO {
         }
     }
 
+    protected function getDeleteStatement($taskID)
+    {
+        return "DELETE FROM tasks WHERE task_id=" . $taskID;
+    }
+
 
 }
