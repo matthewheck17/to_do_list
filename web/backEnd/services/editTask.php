@@ -9,10 +9,18 @@ $connectionValues = array("localhost", "root", "root", "to_do_list");
 $adapter = new DatabaseAdapterMySQLI($connectionValues);
 $taskDAO = new TaskDAO($adapter);
 
-if (!$taskDAO->findByID($_GET['id'])) { //if the id does not exist in the DB
+$json = file_get_contents('php://input');  // Takes raw data from the request
+$data = json_decode($json); // Converts it into a PHP object
+
+if (!$taskDAO->findByID($_GET["id"])) { //if the id does not exist in the DB
     http_response_code(404);
 } else {
-    $updatedTask = new Task($_GET['id'], $_GET['title'], $_GET['content'], $_GET['completed']);
-    $taskDAO->update($updatedTask);
+    if (!empty($data->title) && !empty($data->content) && !empty($data->completed)) { //check that the title and content are not empty
+        $updatedTask = new Task($_GET["id"], $data->title, $data->content, $data->completed);
+        $taskDAO->update($updatedTask);
+        http_response_code(200);
+    } else {
+        http_response_code(400);
+    }
 }
 ?>

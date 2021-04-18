@@ -1,14 +1,14 @@
 <?php
     require_once("../db/DatabaseAdapterMySQLI.class.php");
     require_once("../db/TaskDAO.class.php");
-    // Displays output as JSON in prettyprint
-    header('Content-Type: application/json');
+    
+    header('Content-Type: application/json'); // Displays output as JSON in prettyprint
 
     $connectionValues = array("localhost", "root", "root", "to_do_list");
-
     $adapter = new DatabaseAdapterMySQLI($connectionValues);
     $taskDAO = new TaskDAO($adapter);
     $resultArr = $taskDAO->findAll();
+    
     // If the database is empty, throw the corresponding response code
     if (!$resultArr) {
       http_response_code(404);
