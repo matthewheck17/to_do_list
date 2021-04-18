@@ -10,11 +10,11 @@ The apps will create, update, delete, and read “to do” tasks from the server
 Each student will be graded according to his or her own contribution. Each student must keep track of his or her own contributions and be able to prove them through the commit log on GitHub.
 
 The following HTTP RESTful services must be made available by the server (and nothing more, unless approved by the professor):
--	A GET request to the URL [appdomain]/tasks returns all tasks. 
--	A GET request to the URL [appdomain]/tasks?id=1 returns the task with id 1. The HTTP response 200 (OK) should be returned if the resource exists and 404 otherwise.
--	A POST request to the URL [appdomain]/tasks with a JSON representing the task (without its ID) creates a new task. If the server successfully performs the operation, use the response code 200 (OK) and return a JSON with the newly created task (with its ID) in the body of the message.
--	A PUT request to the URL [appdomain]/tasks?id=1 updates the existing task according to a JSON representing the new state of the task. A successful update should return HTTP response 200.
--	A DELETE request to the URL [appdomain]/tasks?id=1 deletes the task with id 1. A HTTP response 200 should be returned if a task has been deleted and 404 if the file to be deleted was not found.
+-	A GET request to the URL [appdomain]/tasks/ returns all tasks. 
+-	A GET request to the URL [appdomain]/tasks/?id=1 returns the task with id 1. The HTTP response 200 (OK) should be returned if the resource exists and 404 otherwise.
+-	A POST request to the URL [appdomain]/tasks/ with a JSON representing the task (without its ID) creates a new task. If the server successfully performs the operation, use the response code 200 (OK) and return a JSON with the newly created task (with its ID) in the body of the message.
+-	A PUT request to the URL [appdomain]/tasks/?id=1 updates the existing task according to a JSON representing the new state of the task. A successful update should return HTTP response 200.
+-	A DELETE request to the URL [appdomain]/tasks/?id=1 deletes the task with id 1. A HTTP response 200 should be returned if a task has been deleted and 404 if the file to be deleted was not found.
 
 Concerning the clients:
 -	The clients should be able to interact with the server through all of its services.
