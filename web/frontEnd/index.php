@@ -21,7 +21,7 @@
 
 <ul id="myUL">
   <?php
-  $jsondata = file_get_contents('http://127.0.0.1/to_do_list/web/backEnd/services/getAllTasks.php');
+  $jsondata = file_get_contents('http://127.0.0.1/to_do_list/web/backEnd/tasks/');
 
   $data = json_decode($jsondata, true);
   foreach ($data AS $d) {
