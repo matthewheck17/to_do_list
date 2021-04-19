@@ -3,6 +3,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8"/>
+<title>To-Do List</title>
 <link rel="stylesheet" href="css/style.css">
 <script type="text/javascript" src="js/showForm.js"></script>
 </head>
@@ -10,7 +11,8 @@
 
 <div id="myDIV" class="header">
   <h1>To-Do List</h1>
-<form method="post" action="backEnd/services/createTask.php" id="formElement" style="display: none">
+  <!-- TO-DO: Create ajax/jquery request that correlates with the DAO -->
+<form method="post" action="" id="formElement" style="display: none">
   <input type="text" id="myInput" placeholder="Title">
   <input type="text" id="myDesc" placeholder="Description">
   <span onclick="" class="addBtn">Add</span>
@@ -21,11 +23,12 @@
 
 <ul id="myUL">
   <?php
-  $jsondata = file_get_contents('http://127.0.0.1/to_do_list/web/backEnd/tasks/');
+  $baseUrl = 'http://127.0.0.1/to_do_list/web/backEnd/';
+  $jsondata = file_get_contents($baseUrl . 'tasks/');
 
   $data = json_decode($jsondata, true);
   foreach ($data AS $d) {
-    echo "<li><a href='http://127.0.0.1/to_do_list/web/backEnd/tasks/?id=" . $d['task_id'] . "'><b><span class='title'>" . $d['title'] . "</span></b> " . "<p class='content'>" . $d['content'] ."</p>" . '</a></li>';
+    echo "<li><a href='" . $baseUrl . "tasks/?id=" . $d['task_id'] . "'><b><span class='title'>" . $d['title'] . "</span></b> " . "<p class='content'>" . $d['content'] .'</p></a><button onclick="" class="editTask">Edit</button></li>';
   }
   ?>
 </ul>
