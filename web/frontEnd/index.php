@@ -25,7 +25,7 @@
 
   $data = json_decode($jsondata, true);
   foreach ($data AS $d) {
-    echo '<li>' . "<b>" . $d['title'] . "</b> " . $d['content'] . '</li>';
+    echo "<li><a href='http://127.0.0.1/to_do_list/web/backEnd/tasks/?id=" . $d['task_id'] . "'><b><span class='title'>" . $d['title'] . "</span></b> " . "<p class='content'>" . $d['content'] ."</p>" . '</a></li>';
   }
   ?>
 </ul>
