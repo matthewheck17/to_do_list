@@ -6,6 +6,8 @@
 <title>To-Do List</title>
 <link rel="stylesheet" href="css/style.css">
 <script type="text/javascript" src="js/showForm.js"></script>
+<script type="text/javascript" src="js/formResults.js"></script>
+
 </head>
 <body>
 
@@ -13,9 +15,9 @@
   <h1>To-Do List</h1>
   <!-- TO-DO: Create ajax/jquery request that correlates with the DAO -->
 <form method="post" action="" id="formElement" style="display: none">
-  <input type="text" id="myInput" placeholder="Title">
+  <input type="text" id="myInput" name="inputbox" placeholder="Title">
   <input type="text" id="myDesc" placeholder="Description">
-  <span onclick="" class="addBtn">Add</span>
+  <span onclick="formResults(this.form)" class="addBtn">Add</span>
 </form>
 
 </div>
