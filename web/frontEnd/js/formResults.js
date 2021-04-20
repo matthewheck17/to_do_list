@@ -1,4 +1,5 @@
 function formResults(form){
-    var TestVar = form.inputbox.value;
-    alert ("You typed: " + TestVar);
+    var title = form.title.value;
+    var description = form.description.value;
+    alert(title + " " + description);
 }

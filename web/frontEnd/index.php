@@ -15,9 +15,9 @@
   <h1>To-Do List</h1>
   <!-- TO-DO: Create ajax/jquery request that correlates with the DAO -->
 <form method="post" action="" id="formElement" style="display: none">
-  <input type="text" id="myInput" name="inputbox" placeholder="Title">
-  <input type="text" id="myDesc" placeholder="Description">
-  <span onclick="formResults(this.form)" class="addBtn">Add</span>
+  <input type="text" id="myInput" name="title" placeholder="Title">
+  <input type="text" id="myDesc" name="description" placeholder="Description">
+  <input type="button" name="button" value="Add" onClick="formResults(this.form)">
 </form>
 
 </div>
