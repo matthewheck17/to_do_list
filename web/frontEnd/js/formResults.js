@@ -1,5 +1,9 @@
 function formResults(form){
-    var title = form.title.value;
-    var description = form.description.value;
-   // alert(title + " " + description);
+   var tasks = {
+        title: form.title.value, 
+        content: form.description.value
+   }
+
+   var work = JSON.stringify(tasks);
+   alert(work);
 }
