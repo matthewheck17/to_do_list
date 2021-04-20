@@ -15,6 +15,7 @@ import org.json.JSONObject
 
 class taskDescription : AppCompatActivity() {
 
+
     private var taskName: EditText? = null
     private var taskDescription: EditText? = null
     private var addNewTaskTitle: TextView? = null
@@ -65,8 +66,8 @@ class taskDescription : AppCompatActivity() {
             @Throws(AuthFailureError::class)
             override fun getParams(): Map<String, String> {
                 val params = HashMap<String, String>()
-                params["title"] = title
-                params["content"] = content
+                params.put("title", title)
+                params.put("content", content)
                 return params
             }
         }
