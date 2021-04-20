@@ -36,9 +36,7 @@ class MainActivity : AppCompatActivity() {
         }
 
          private fun loadTasks() {
-            val stringRequest = StringRequest(Request.Method.GET,
-                EndPoints.URL_GET_TASK,
-                { s ->
+            val stringRequest = StringRequest(Request.Method.GET, EndPoints.URL_TASK, { s ->
                     try {
                         val obj = JSONObject(s)
                             val array = obj.getJSONArray("tasks")
@@ -46,8 +44,10 @@ class MainActivity : AppCompatActivity() {
                             for (i in 0 until array.length()) {
                                 val objectTask = array.getJSONObject(i)
                                 val task = Task(
+                                    objectTask.getInt("task_id"),
                                     objectTask.getString("title"),
-                                    objectTask.getString("content")
+                                    objectTask.getString("content"),
+                                    objectTask.getBoolean("completed")
                                 )
                                 tasksList!!.add(task)
                                 val adapter = TaskList(this@MainActivity, tasksList!!)

@@ -5,6 +5,10 @@ import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.toolbox.Volley
 
+
+// Sets up a single instance of RequestQueue.
+// Encapsulates RequestQueue and other Volley
+// functionality.
 class VolleySingleton : Application() {
     override fun onCreate() {
         super.onCreate()

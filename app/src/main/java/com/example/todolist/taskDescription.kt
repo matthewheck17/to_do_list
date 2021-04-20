@@ -18,7 +18,6 @@ class taskDescription : AppCompatActivity() {
 
     private var taskName: EditText? = null
     private var taskDescription: EditText? = null
-    private var addNewTaskTitle: TextView? = null
     private var saveButton: Button? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,14 +25,12 @@ class taskDescription : AppCompatActivity() {
         setContentView(R.layout.activity_task_description)
 
 
-        taskName = findViewById(R.id.taskName)
-        taskDescription = findViewById(R.id.taskDescription)
-        addNewTaskTitle = findViewById(R.id.addNewTaskTitle)
-        saveButton = findViewById(R.id.saveButton)
+        taskName = findViewById(R.id.taskName) as EditText
+        taskDescription = findViewById(R.id.taskDescription) as EditText
+        saveButton = findViewById(R.id.saveButton) as Button
 
         //adding a click listener to button
         val save = findViewById<Button>(R.id.saveButton)
-
         save.setOnClickListener {
             addTask()
         }
@@ -44,7 +41,7 @@ class taskDescription : AppCompatActivity() {
         }
     }
 
-    //adding a new task to database
+    // Adding a new task to database
     private fun addTask() {
 
         //getting the task values
@@ -53,11 +50,11 @@ class taskDescription : AppCompatActivity() {
 
 
         //creating volley string request
-        val stringRequest = object : StringRequest(Request.Method.POST, EndPoints.URL_ADD_TASK,
+        val stringRequest = object : StringRequest(Request.Method.POST, EndPoints.URL_TASK,
             Response.Listener<String> { response ->
                 try {
                     val obj = JSONObject(response)
-
+                    Toast.makeText(applicationContext, "Task has been successfully added!", Toast.LENGTH_SHORT).show()
                 } catch (e: JSONException) {
                     e.printStackTrace()
                 }
