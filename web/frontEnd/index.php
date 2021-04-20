@@ -29,7 +29,7 @@
   $data = json_decode($jsondata, true);
   foreach ($data AS $d) {
     // If the task is marked completed, strike through the element
-    if ($d['completed'] == '0') {
+    if ($d['completed'] === '0') {
       echo "<li><strike><a href='" . $baseUrl . "tasks/?id=" . $d['task_id'] . "'><b><span class='title'>" . $d['title'] . "</span></b> " . "<p class='content'>" . $d['content'] .'</p></a></strike><button onclick="" class="editTask">Edit</button></li>';
     } else {
       echo "<li><a href='" . $baseUrl . "tasks/?id=" . $d['task_id'] . "'><b><span class='title'>" . $d['title'] . "</span></b> " . "<p class='content'>" . $d['content'] .'</p></a><button onclick="" class="editTask">Edit</button></li>';
