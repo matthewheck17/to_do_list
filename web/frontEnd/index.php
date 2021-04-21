@@ -5,7 +5,7 @@
 <meta charset="utf-8"/>
 <title>To-Do List</title>
 <link rel="stylesheet" href="css/style.css">
-<script type="text/javascript" src="js/showForm.js"></script>
+<script type="text/javascript" src="js/functions.js"></script>
 <script type="text/javascript" src="js/formResults.js"></script>
 
 </head>
@@ -17,7 +17,7 @@
 <form method="post" action="" id="formElement" style="display: none">
   <input type="text" id="myInput" name="title" placeholder="Title">
   <input type="text" id="myDesc" name="description" placeholder="Description">
-  <input type="button" name="button" value="Add" onClick="formResults(this.form)">
+  <input type="button" class="addBtn" name="button" value="Add" onClick="sendJSON()">
 </form>
 
 </div>
@@ -31,7 +31,7 @@
   $data = json_decode($jsondata, true);
   foreach ($data AS $d) {
     // If the task is marked completed, strike through the element
-    if ($d['completed'] === '0') {
+    if ($d['completed'] === '1') {
       echo "<li><strike><a href='" . $baseUrl . "tasks/?id=" . $d['task_id'] . "'><b><span class='title'>" . $d['title'] . "</span></b> " . "<p class='content'>" . $d['content'] .'</p></a></strike><button onclick="" class="editTask">Edit</button></li>';
     } else {
       echo "<li><a href='" . $baseUrl . "tasks/?id=" . $d['task_id'] . "'><b><span class='title'>" . $d['title'] . "</span></b> " . "<p class='content'>" . $d['content'] .'</p></a><button onclick="" class="editTask">Edit</button></li>';
