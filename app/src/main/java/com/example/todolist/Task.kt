@@ -1,4 +1,8 @@
 package com.example.todolist
 
-data class Task(val task_id : Int, val title : String,
-                val content : String, val completed : Boolean)
+data class Task(
+    var task_id: Int?=0,
+    var title: String?="",
+    var content : String?="",
+    var completed : Boolean?=false) {
+}

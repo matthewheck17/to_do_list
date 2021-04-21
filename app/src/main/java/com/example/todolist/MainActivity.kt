@@ -1,75 +1,129 @@
 package com.example.todolist
 
-import android.content.Intent
+import android.app.Dialog
 import android.os.Bundle
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ListView
+import android.view.*
 import android.widget.Toast
-import com.android.volley.Request
-import com.android.volley.Response
-import org.json.JSONException
-import org.json.JSONObject
 import androidx.appcompat.app.AppCompatActivity
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_task_description.view.*
 
-class MainActivity : AppCompatActivity() {
 
-    var listView: ListView? = null
-    var tasksList: MutableList<Task>? = null
+class MainActivity : AppCompatActivity(), TaskServiceFactory.TaskListener {
+
+    private lateinit var vm:TaskViewModel
+    private lateinit var adapter: TaskServiceFactory
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        listView = findViewById<ListView>(R.id.tasksList)
-        tasksList = mutableListOf<Task>()
-        loadTasks()
+        vm = ViewModelProvider.AndroidViewModelFactory.getInstance(this.application).create(TaskViewModel::class.java)
 
-        val add = findViewById<FloatingActionButton>(R.id.add)
-        add.setOnClickListener {
-            val intent = Intent(this, taskDescription::class.java)
-            startActivity(intent)
+        initAdapter()
+
+        vm.getAllTasks()
+
+        vm.taskModelListLiveData?.observe(this, Observer {
+            if (it != null) {
+                home.visibility = View.VISIBLE
+                adapter.setData(it as ArrayList<Task>)
+            }
+            else {
+                showToast("There are currently no tasks.")
+            }
+            progress_home.visibility = View.GONE
+        })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.home_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.menu_create_task -> showCreateTaskDialog()
         }
-        }
+        return true
+    }
 
-         private fun loadTasks() {
-            val stringRequest = StringRequest(Request.Method.GET, EndPoints.URL_TASK, { s ->
-                    try {
-                        val obj = JSONObject(s)
-                            val array = obj.getJSONArray("tasks")
+    private fun showCreateTaskDialog() {
+        val dialog = Dialog(this)
+        val view = LayoutInflater.from(this).inflate(R.layout.activity_task_description, null)
+        dialog.setContentView(view)
 
-                            for (i in 0 until array.length()) {
-                                val objectTask = array.getJSONObject(i)
-                                val task = Task(
-                                    objectTask.getInt("task_id"),
-                                    objectTask.getString("title"),
-                                    objectTask.getString("content"),
-                                    objectTask.getBoolean("completed")
-                                )
-                                tasksList!!.add(task)
-                                val adapter = TaskList(this@MainActivity, tasksList!!)
-                                listView!!.adapter = adapter
-                            }
+        var title = ""
+        var content = ""
+
+
+            view.btn_submit.setOnClickListener {
+            title = view.et_title.text.toString().trim()
+            content = view.et_content.text.toString().trim()
+
+            if (title.isNotEmpty() && content.isNotEmpty()){
+                val task = Task()
+                task.task_id = 0
+                task.title = title
+                task.content = content
+                task.completed = false
+
+                vm.createTask(task)
+
+                vm.createTaskLiveData?.observe(this, Observer {
+                    if (it != null) {
+                        adapter.addData(task)
+                        home.smoothScrollToPosition(0)
+                    } else {
+                        showToast("Your task has not been added.")
                     }
-                    catch (e: JSONException) {
-                        e.printStackTrace()
-                    }
-                },
-                { volleyError ->
-                    Toast.makeText(
-                        applicationContext,
-                        volleyError.message,
-                        Toast.LENGTH_LONG
-                    ).show()
+                    dialog.cancel()
                 })
 
-            val requestQueue = Volley.newRequestQueue(this)
-            requestQueue.add<String>(stringRequest)
+            }else{
+                showToast("You must enter in a task title and content!")
+            }
+
         }
+
+        dialog.show()
+
+        val window = dialog.window
+        window?.setLayout(
+            WindowManager.LayoutParams.MATCH_PARENT,
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+
     }
+
+    private fun initAdapter() {
+        adapter = TaskServiceFactory(this)
+        home.layoutManager = LinearLayoutManager(this)
+        home.adapter = adapter
+    }
+
+    override fun onItemDeleted(task: Task, position: Int) {
+        task.task_id?.let { vm.deleteTask(it) }
+        vm.deleteTaskLiveData?.observe(this, Observer {
+            if (it != null) {
+                adapter.removeData(position)
+            } else {
+                showToast("Cannot delete post at the moment!")
+            }
+        })
+
+    }
+
+    private fun showToast(msg: String){
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+    }
+
+
+}
         /*
 
         val arrayAdapter: ArrayAdapter<*>
