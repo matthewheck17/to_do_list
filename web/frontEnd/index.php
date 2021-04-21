@@ -13,7 +13,6 @@
 
 <div id="myDIV" class="header">
   <h1>To-Do List</h1>
-  <!-- TO-DO: Create ajax/jquery request that correlates with the DAO -->
 <form method="post" action="" id="formElement" style="display: none">
   <input type="text" id="myInput" name="title" placeholder="Title">
   <input type="text" id="myDesc" name="description" placeholder="Description">
@@ -32,20 +31,21 @@
   foreach ($data AS $d) {
     // If the task is marked completed, strike through the element
     if ($d['completed'] === '1') {
-      echo "<li><strike><a href='" . $baseUrl . "tasks/?id=" . $d['task_id'] . "'><b><span class='title'>" . $d['title'] . "</span></b> " . "<p class='content'>" . $d['content'] .'</p></a></strike><button onclick="" class="editTask">Edit</button></li>';
+      echo "<li id><strike><a href='" . $baseUrl . "tasks/?id=" . $d['task_id'] . "'><b><span class='title'>" . $d['title'] . "</span></b> " . "<p class='content'>" . $d['content'] .'</p></a></strike><button id="editTask" onclick="editForm()">Edit</button><input type="text" id="editTitle" name="title" placeholder="'. $d['title'] . '"></input><input type="text" id="editDesc" name="Description" placeholder="Description" placeholder="'. $d['content'] . '"></li>';
     } else {
-      echo "<li><a href='" . $baseUrl . "tasks/?id=" . $d['task_id'] . "'><b><span class='title'>" . $d['title'] . "</span></b> " . "<p class='content'>" . $d['content'] .'</p></a><button onclick="" class="editTask">Edit</button></li>';
+      echo "<li><a href='" . $baseUrl . "tasks/?id=" . $d['task_id'] . "'><b><span class='title'>" . $d['title'] . "</span></b> " . "<p class='content'>" . $d['content'] .'</p></a><button id="editTask" onclick="editForm()"> Edit</button><input type="text" id="editTitle" name="title" placeholder="'. $d['title'] . '"></input><input type="text" id="editDesc" name="Description" placeholder="'. $d['content'] . '"></input></li>';
     }
   }
   ?>
 </ul>
-</div>
+<Title
 </body>
 <script>
+// Refreshes the results without reloading the page
 $(document).ready(function(){
 setInterval(function(){
-      $("#myUL").load(window.location.href + " #myUL" );
-}, 100);
+      $("#results").load(window.location.href + " #results" );
+}, 1500);
 });
 </script>
 </body>
