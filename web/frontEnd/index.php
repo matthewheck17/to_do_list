@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="css/style.css">
 <script type="text/javascript" src="js/functions.js"></script>
 <script type="text/javascript" src="js/formResults.js"></script>
-
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -22,7 +22,7 @@
 
 </div>
 <button type="button" name="button" onclick="showForm()" class="showBtn">Add Task</button>
-
+<div id="results">
 <ul id="myUL">
   <?php
   $baseUrl = 'http://127.0.0.1/to_do_list/web/backEnd/';
@@ -39,7 +39,14 @@
   }
   ?>
 </ul>
+</div>
 </body>
-
+<script>
+$(document).ready(function(){
+setInterval(function(){
+      $("#myUL").load(window.location.href + " #myUL" );
+}, 100);
+});
+</script>
 </body>
 </html>
