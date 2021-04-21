@@ -16,7 +16,7 @@
 <form method="post" action="" id="formElement" style="display: none">
   <input type="text" id="myInput" name="title" placeholder="Title">
   <input type="text" id="myDesc" name="description" placeholder="Description">
-  <input type="button" class="addBtn" name="button" value="Add" onClick="sendJSON()">
+  <input type="button" id="addBtn" class="addBtn" name="button" value="Add" onClick="sendJSON()">
 </form>
 
 </div>
@@ -38,14 +38,14 @@
   }
   ?>
 </ul>
-<Title
 </body>
 <script>
 // Refreshes the results without reloading the page
+
 $(document).ready(function(){
 setInterval(function(){
       $("#results").load(window.location.href + " #results" );
-}, 1500);
+}, 10000);
 });
 </script>
 </body>
