@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-const val BASEURL = "https://10.0.2.2:8888/to_do_list/web/backEnd/tasks/"
+const val BASEURL = "https://www.matthewheck.me/to_do_list/tasks/"
 class TaskClient {
 
     companion object{
