@@ -15,7 +15,7 @@ ul {
   padding: 0;
 }
 
-#editTask, #editTitle, #editDesc {
+#editTask, #editTitle, #editDesc, #deleteTask {
   display: none;
 }
 
@@ -42,6 +42,9 @@ ul li:hover {
 
 /* Shows the edit button on hover */
 ul li:hover > #editTask {
+  display: block;
+}
+ul li:hover > #deleteTask {
   display: block;
 }
 /* Style the header */

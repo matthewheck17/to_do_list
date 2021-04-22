@@ -6,7 +6,6 @@
 <title>To-Do List</title>
 <link rel="stylesheet" href="css/style.css">
 <script type="text/javascript" src="js/functions.js"></script>
-<script type="text/javascript" src="js/formResults.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
@@ -29,11 +28,14 @@
 
   $data = json_decode($jsondata, true);
   foreach ($data AS $d) {
+    $taskID = $d['task_id'];
     // If the task is marked completed, strike through the element
     if ($d['completed'] === '1') {
-      echo "<li id><strike><a href='" . $baseUrl . "tasks/?id=" . $d['task_id'] . "'><b><span class='title'>" . $d['title'] . "</span></b> " . "<p class='content'>" . $d['content'] .'</p></a></strike><button id="editTask" onclick="editForm()">Edit</button><input type="text" id="editTitle" name="title" placeholder="'. $d['title'] . '"></input><input type="text" id="editDesc" name="Description" placeholder="Description" placeholder="'. $d['content'] . '"></li>';
+      echo "<li id><strike><a href='" . $baseUrl . "tasks/?id=" . $taskID . "'><b><span class='title'>" . $d['title'] . "</span></b> " . "<p class='content'>" . $d['content'] .'</p></a></strike><button id="editTask" onclick="editForm()">Edit</button><input type="text" id="editTitle" name="title" placeholder="'. $d['title'] . '"></input><input type="text" id="editDesc" name="Description" placeholder="Description" placeholder="'. $d['content'] . '">';
+      echo "<button id='deleteTask' onclick='deleteTask(" . $taskID . ")'>Delete</button></li>";
     } else {
-      echo "<li><a href='" . $baseUrl . "tasks/?id=" . $d['task_id'] . "'><b><span class='title'>" . $d['title'] . "</span></b> " . "<p class='content'>" . $d['content'] .'</p></a><button id="editTask" onclick="editForm()"> Edit</button><input type="text" id="editTitle" name="title" placeholder="'. $d['title'] . '"></input><input type="text" id="editDesc" name="Description" placeholder="'. $d['content'] . '"></input></li>';
+      echo "<li><a href='" . $baseUrl . "tasks/?id=" . $taskID . "'><b><span class='title'>" . $d['title'] . "</span></b> " . "<p class='content'>" . $d['content'] .'</p></a><button id="editTask" onclick="editForm()"> Edit</button><input type="text" id="editTitle" name="title" placeholder="'. $d['title'] . '"></input><input type="text" id="editDesc" name="Description" placeholder="'. $d['content'] . '"></input>';
+      echo "<button id='deleteTask' onclick='deleteTask(" . $taskID . ")'>Delete</button></li>";
     }
   }
   ?>

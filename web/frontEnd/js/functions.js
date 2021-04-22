@@ -8,6 +8,25 @@ function showForm() {
   }
 }
 
+function deleteTask(id) {
+
+  // Specify the URL
+  let xhr = new XMLHttpRequest();
+  let url = "http://127.0.0.1/to_do_list/web/backEnd/tasks/?id=" + id;
+
+  // Sets the request type to DELETE
+  xhr.open("DELETE", url, true);
+
+  // Set the content type to JSON so the DAO can access it and add it to the database
+  xhr.setRequestHeader("Content-Type", "application/json");
+
+  // Converting JSON data to string
+  var data = JSON.stringify({ "task_id": id });
+
+  // Sends the data
+  xhr.send(data);
+}
+
 function sendJSON() {
 
   // Get the two form elements from the index.php page
