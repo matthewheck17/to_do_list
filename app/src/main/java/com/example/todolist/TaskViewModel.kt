@@ -12,6 +12,7 @@ class TaskViewModel (application: Application): AndroidViewModel(application){
     private var taskRepository:TaskRepository?=null
     var taskModelListLiveData : LiveData<List<Task>>?=null
     var createTaskLiveData:LiveData<Task>?=null
+    var editTaskLiveData:LiveData<Task>?=null
     var deleteTaskLiveData:LiveData<Boolean>?=null
 
     init {
@@ -19,18 +20,22 @@ class TaskViewModel (application: Application): AndroidViewModel(application){
         taskModelListLiveData = MutableLiveData()
         createTaskLiveData = MutableLiveData()
         deleteTaskLiveData = MutableLiveData()
+        editTaskLiveData = MutableLiveData()
     }
 
-    fun getAllTasks(){
+    fun getAllTasks() {
         taskModelListLiveData = taskRepository?.getAllTasks()
     }
 
-    fun createTask(task: Task){
+    fun createTask(task: Task) {
         createTaskLiveData = taskRepository?.createTask(task)
     }
 
-    fun deleteTask(id:Int){
+    fun deleteTask(id:Int) {
         deleteTaskLiveData = taskRepository?.deleteTask(id)
     }
 
+    fun editTask(task: Task) {
+        editTaskLiveData = taskRepository?.editTask(task)
+    }
 }

@@ -3,6 +3,7 @@ package com.example.todolist
 import android.app.Dialog
 import android.os.Bundle
 import android.view.*
+import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -13,10 +14,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_task_description.view.*
 
 
-class MainActivity : AppCompatActivity(), TaskServiceFactory.TaskListener {
+class MainActivity : AppCompatActivity(), TaskAdapter.TaskListener {
 
     private lateinit var vm:TaskViewModel
-    private lateinit var adapter: TaskServiceFactory
+    private lateinit var adapter: TaskAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +28,7 @@ class MainActivity : AppCompatActivity(), TaskServiceFactory.TaskListener {
         initAdapter()
 
         vm.getAllTasks()
+        vm.deleteTask(0)
 
         vm.taskModelListLiveData?.observe(this, Observer {
             if (it != null) {
@@ -65,7 +67,7 @@ class MainActivity : AppCompatActivity(), TaskServiceFactory.TaskListener {
             title = view.et_title.text.toString().trim()
             content = view.et_content.text.toString().trim()
 
-            if (title.isNotEmpty() && content.isNotEmpty()){
+            if (title.isNotEmpty() && content.isNotEmpty()) {
                 val task = Task()
                 task.task_id = 0
                 task.title = title
@@ -76,18 +78,18 @@ class MainActivity : AppCompatActivity(), TaskServiceFactory.TaskListener {
 
                 vm.createTaskLiveData?.observe(this, Observer {
                     if (it != null) {
-                        adapter.addData(task)
+                        adapter.addTask(task)
                         home.smoothScrollToPosition(0)
-                    } else {
-                        showToast("Your task has not been added.")
-                    }
+                    } //else {
+                       // showToast("Your task has not been added.")
+                   // }
                     dialog.cancel()
                 })
 
-            }else{
+            }
+            else {
                 showToast("You must enter in a task title and content!")
             }
-
         }
 
         dialog.show()
@@ -97,11 +99,11 @@ class MainActivity : AppCompatActivity(), TaskServiceFactory.TaskListener {
             WindowManager.LayoutParams.MATCH_PARENT,
             WindowManager.LayoutParams.WRAP_CONTENT
         )
-
     }
 
+
     private fun initAdapter() {
-        adapter = TaskServiceFactory(this)
+        adapter = TaskAdapter(this)
         home.layoutManager = LinearLayoutManager(this)
         home.adapter = adapter
     }
@@ -110,9 +112,9 @@ class MainActivity : AppCompatActivity(), TaskServiceFactory.TaskListener {
         task.task_id?.let { vm.deleteTask(it) }
         vm.deleteTaskLiveData?.observe(this, Observer {
             if (it != null) {
-                adapter.removeData(position)
+                adapter.removeTask(position)
             } else {
-                showToast("Cannot delete post at the moment!")
+                showToast("Cannot delete task at the moment!")
             }
         })
 

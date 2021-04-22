@@ -9,15 +9,15 @@ import com.example.todolist.R
 import com.example.todolist.Task
 import kotlinx.android.synthetic.main.homeview.view.*
 
-class TaskServiceFactory (var listener:TaskListener) : RecyclerView.Adapter<TaskServiceFactory.TaskViewHolder>(){
+class TaskAdapter (var listener:TaskListener) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     private var data : ArrayList<Task>?=null
 
-    interface TaskListener{
+    interface TaskListener {
         fun onItemDeleted(task: Task, position: Int)
     }
 
-    fun setData(list: ArrayList<Task>){
+    fun setData(list: ArrayList<Task>) {
         data = list
         notifyDataSetChanged()
     }
@@ -40,15 +40,23 @@ class TaskServiceFactory (var listener:TaskListener) : RecyclerView.Adapter<Task
         }
     }
 
-    fun addData(task: Task) {
+    fun addTask(task: Task) {
         data?.add(0,task)
         notifyItemInserted(0)
+        notifyDataSetChanged()
     }
 
-    fun removeData(position: Int) {
+    fun editTask(task: Task) {
+        data?.set(0, task)
+        notifyDataSetChanged()
+    }
+
+    fun removeTask(position: Int) {
         data?.removeAt(position)
         notifyDataSetChanged()
     }
+
+
 
     class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         fun bindView(item: Task?) {

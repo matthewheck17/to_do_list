@@ -64,6 +64,27 @@ fun createTask(task: Task):LiveData<Task>{
 
 }
 
+fun editTask(task: Task):LiveData<Task> {
+    val data = MutableLiveData<Task>()
+
+    taskService?.editTask(task)?.enqueue(object : Callback<Task>{
+        override fun onFailure(call: Call<Task>, t: Throwable) {
+            data.value = null
+        }
+        override fun onResponse(call: Call<Task>, response: Response<Task>) {
+            val res = response.body()
+            if (response.code() == 201 && res!=null){
+                data.value = res
+            }else{
+                data.value = null
+            }
+        }
+    })
+
+    return data
+
+}
+
 
 fun deleteTask(id:Int):LiveData<Boolean>{
     val data = MutableLiveData<Boolean>()
