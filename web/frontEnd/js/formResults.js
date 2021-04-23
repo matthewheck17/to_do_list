@@ -4,6 +4,6 @@ function formResults(form){
         content: form.description.value
    }
 
-   var work = JSON.stringify(tasks);
+    var work = JSON.stringify(tasks);
    alert(work);
 }
