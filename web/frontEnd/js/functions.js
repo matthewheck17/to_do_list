@@ -1,3 +1,4 @@
+const baseUrl =  "http://127.0.0.1/to_do_list/web/backEnd/tasks/"
 // Function that toggles/hides the form
 function showForm() {
   x =  document.getElementById('formElement');
@@ -12,7 +13,7 @@ function deleteTask(id) {
 
   // Specify the URL
   let xhr = new XMLHttpRequest();
-  let url = "http://127.0.0.1/to_do_list/web/backEnd/tasks/?id=" + id;
+  let url = baseUrl + "?id=" + id;
 
   // Sets the request type to DELETE
   xhr.open("DELETE", url, true);
@@ -35,10 +36,9 @@ function sendJSON() {
 
   // Specify the URL
   let xhr = new XMLHttpRequest();
-  let url = "http://127.0.0.1/to_do_list/web/backEnd/tasks/";
 
   // Sets the request type to POST
-  xhr.open("POST", url, true);
+  xhr.open("POST", baseUrl, true);
 
   // Set the content type to JSON so the DAO can access it and add it to the database
   xhr.setRequestHeader("Content-Type", "application/json");
