@@ -28,32 +28,33 @@ function deleteTask(id) {
   xhr.send(data);
 }
 
-function sendJSON() {
+window.onload = function() {
+  document.getElementById("addBtn").onclick = function fun() {
+    // Get the two form elements from the index.php page
+    let title = document.getElementById('myInput');
+    let description = document.getElementById('myDesc');
 
-  // Get the two form elements from the index.php page
-  let title = document.getElementById('myInput');
-  let description = document.getElementById('myDesc');
+    // Specify the URL
+    let xhr = new XMLHttpRequest();
 
-  // Specify the URL
-  let xhr = new XMLHttpRequest();
+    // Sets the request type to POST
+    xhr.open("POST", baseUrl, true);
 
-  // Sets the request type to POST
-  xhr.open("POST", baseUrl, true);
+    // Set the content type to JSON so the DAO can access it and add it to the database
+    xhr.setRequestHeader("Content-Type", "application/json");
 
-  // Set the content type to JSON so the DAO can access it and add it to the database
-  xhr.setRequestHeader("Content-Type", "application/json");
-
-  // If the request is successful, clear the inputted text.
-  xhr.onreadystatechange = function() {
-    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+    // If the request is successful, clear the inputted text.
+    xhr.onreadystatechange = function() {
+      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
         title.value = '';
         description.value = '';
+      }
     }
-}
 
-  // Converting JSON data to string
-  var data = JSON.stringify({ "title": title.value, "content": description.value });
+    // Converting JSON data to string
+    var data = JSON.stringify({ "title": title.value, "content": description.value });
 
-  // Sends the data
-  xhr.send(data);
+    // Sends the data
+    xhr.send(data);
+  }
 }
