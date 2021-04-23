@@ -8,16 +8,16 @@ import retrofit2.Response
 
 class TaskRepository     {
 
-private var taskService:TaskService?=null
+private var taskInterface:TaskInterface?=null
 
 init {
-    taskService = TaskClient.getClient().create(TaskService::class.java)
+    taskInterface = TaskClient.getClient().create(TaskInterface::class.java)
 }
 
 fun getAllTasks(): LiveData<List<Task>> {
     val data = MutableLiveData<List<Task>>()
 
-    taskService?.getAllTasks()?.enqueue(object : Callback<List<Task>> {
+    taskInterface?.getAllTasks()?.enqueue(object : Callback<List<Task>> {
 
         override fun onFailure(call: Call<List<Task>>, t: Throwable) {
             data.value = null
@@ -31,21 +31,20 @@ fun getAllTasks(): LiveData<List<Task>> {
             val res = response.body()
             if (response.code() == 200 &&  res!=null){
                 data.value = res
-            }else{
+            }
+            else {
                 data.value = null
             }
-
         }
     })
 
     return data
-
 }
 
 fun createTask(task: Task):LiveData<Task>{
     val data = MutableLiveData<Task>()
 
-    taskService?.createTask(task)?.enqueue(object : Callback<Task>{
+    taskInterface?.createTask(task)?.enqueue(object : Callback<Task>{
         override fun onFailure(call: Call<Task>, t: Throwable) {
             data.value = null
         }
@@ -54,20 +53,20 @@ fun createTask(task: Task):LiveData<Task>{
             val res = response.body()
             if (response.code() == 201 && res!=null){
                 data.value = res
-            }else{
+            }
+            else {
                 data.value = null
             }
         }
     })
 
     return data
-
 }
 
 fun editTask(task: Task):LiveData<Task> {
     val data = MutableLiveData<Task>()
 
-    taskService?.editTask(task)?.enqueue(object : Callback<Task>{
+    taskInterface?.editTask(task)?.enqueue(object : Callback<Task>{
         override fun onFailure(call: Call<Task>, t: Throwable) {
             data.value = null
         }
@@ -82,14 +81,13 @@ fun editTask(task: Task):LiveData<Task> {
     })
 
     return data
-
 }
 
 
-fun deleteTask(id:Int):LiveData<Boolean>{
+fun deleteTask(task_id:Int):LiveData<Boolean>{
     val data = MutableLiveData<Boolean>()
 
-    taskService?.deleteTask(id)?.enqueue(object : Callback<String>{
+    taskInterface?.deleteTask(task_id)?.enqueue(object : Callback<String>{
         override fun onFailure(call: Call<String>, t: Throwable) {
             data.value = false
         }
@@ -100,9 +98,5 @@ fun deleteTask(id:Int):LiveData<Boolean>{
     })
 
     return data
-
 }
-
-
-
 }

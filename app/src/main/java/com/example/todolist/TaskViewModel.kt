@@ -10,6 +10,7 @@ import com.example.todolist.Task
 class TaskViewModel (application: Application): AndroidViewModel(application){
 
     private var taskRepository:TaskRepository?=null
+
     var taskModelListLiveData : LiveData<List<Task>>?=null
     var createTaskLiveData:LiveData<Task>?=null
     var editTaskLiveData:LiveData<Task>?=null
@@ -31,8 +32,8 @@ class TaskViewModel (application: Application): AndroidViewModel(application){
         createTaskLiveData = taskRepository?.createTask(task)
     }
 
-    fun deleteTask(id:Int) {
-        deleteTaskLiveData = taskRepository?.deleteTask(id)
+    fun deleteTask(task_id:Int) {
+        deleteTaskLiveData = taskRepository?.deleteTask(task_id)
     }
 
     fun editTask(task: Task) {

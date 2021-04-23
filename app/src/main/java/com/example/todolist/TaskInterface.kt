@@ -4,7 +4,7 @@ import com.example.todolist.Task
 import retrofit2.Call
 import retrofit2.http.*
 
-interface TaskService {
+interface TaskInterface {
 
     @GET("index.php")
     fun getAllTasks(): Call<List<Task>>

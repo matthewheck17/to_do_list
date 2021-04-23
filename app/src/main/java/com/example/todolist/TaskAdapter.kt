@@ -13,6 +13,8 @@ class TaskAdapter (var listener:TaskListener) : RecyclerView.Adapter<TaskAdapter
 
     private var data : ArrayList<Task>?=null
 
+    // Listener that tells our Main Activity
+    // which task to delete
     interface TaskListener {
         fun onItemDeleted(task: Task, position: Int)
     }
@@ -30,10 +32,12 @@ class TaskAdapter (var listener:TaskListener) : RecyclerView.Adapter<TaskAdapter
         return data?.size ?: 0
     }
 
+    // Set an onclick listener on the cancel button and call this callback
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val item = data?.get(position)
         holder.bindView(item)
-        holder.itemView.img_delete.setOnClickListener {
+
+        holder.itemView.delete.setOnClickListener {
             item?.let { it1 ->
                 listener.onItemDeleted(it1, position)
             }
@@ -46,10 +50,12 @@ class TaskAdapter (var listener:TaskListener) : RecyclerView.Adapter<TaskAdapter
         notifyDataSetChanged()
     }
 
+
     fun editTask(task: Task) {
         data?.set(0, task)
         notifyDataSetChanged()
     }
+
 
     fun removeTask(position: Int) {
         data?.removeAt(position)
@@ -57,13 +63,10 @@ class TaskAdapter (var listener:TaskListener) : RecyclerView.Adapter<TaskAdapter
     }
 
 
-
     class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         fun bindView(item: Task?) {
             itemView.Tasktitle.text = item?.title
             itemView.content.text = item?.content
         }
-
     }
-
 }

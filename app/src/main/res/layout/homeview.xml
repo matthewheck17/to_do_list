@@ -19,7 +19,7 @@
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:textSize="16sp"
-            app:layout_constraintTop_toTopOf="@id/img_delete"
+            app:layout_constraintTop_toTopOf="@id/delete"
             app:layout_constraintStart_toStartOf="parent"/>
 
         <TextView
@@ -34,12 +34,11 @@
             android:layout_marginTop="10dp"/>
 
 
-
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_action_cancel"
-            android:id="@+id/img_delete"
+            android:id="@+id/delete"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:padding="10dp"/>
@@ -49,8 +48,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            app:layout_constraintEnd_toStartOf="@+id/img_delete"
-            app:layout_constraintTop_toTopOf="@+id/img_delete" />
+            app:layout_constraintEnd_toStartOf="@+id/delete"
+            app:layout_constraintTop_toTopOf="@+id/delete" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
