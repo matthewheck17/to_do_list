@@ -15,8 +15,23 @@ ul {
   padding: 0;
 }
 
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
 #editTask, #editTitle, #editDesc, #deleteTask {
   display: none;
+}
+
+#editTitle, #editDesc {
+  width: 25%;
 }
 
 a:hover, a:visited, a:link, a:active {
@@ -24,27 +39,17 @@ a:hover, a:visited, a:link, a:active {
   text-decoration: none;
 }
 
-/* Style the list items */
-ul li {
-  cursor: pointer;
-  position: relative;
-  padding: 12px 8px 12px 40px;
-  list-style-type: none;
-  background: #eee;
-  font-size: 18px;
-  transition: 0.2s;
-}
-
 /* Darker background-color on hover */
-ul li:hover {
+table td:hover, table tr:hover {
   background: #ddd;
 }
 
-/* Shows the edit button on hover */
-ul li:hover > #editTask {
-  display: block;
+table th {
+  background: white;
 }
-ul li:hover > #deleteTask {
+
+/* Shows the edit button on hover */
+table td:hover > #deleteTask {
   display: block;
 }
 /* Style the header */
@@ -86,8 +91,7 @@ input {
   transition: 0.3s;
   border-radius: 0;
 }
-
-.showBtn {
+.showBtn, .refreshBtn {
   width: 100%;
   background: #d9d9d9;
   text-align: center;
