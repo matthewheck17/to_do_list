@@ -1,4 +1,4 @@
-const baseUrl =  "http://127.0.0.1/to_do_list/web/backEnd/tasks/"
+const baseUrl =  "https://matthewheck.me/to_do_list/tasks/"
 // Function that toggles/hides the form
 function showForm() {
   x =  document.getElementById('formElement');
@@ -77,7 +77,7 @@ window.onload = function() {
     xhr.send();
   };
 
-  getJSON('/to_do_list/web/backEnd/tasks/',  function(err, data) {
+  getJSON(baseUrl,  function(err, data) {
     if (err != null) {
       console.error(err);
     } else {
