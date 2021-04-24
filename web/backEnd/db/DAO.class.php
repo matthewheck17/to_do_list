@@ -15,13 +15,13 @@ abstract class DAO
   // The select statement for the table
   abstract protected function getSelectStatement();
 
-  abstract protected function getSpecificSelectStatement($id);
+  abstract protected function getSpecificSelectStatement();
 
-  // The insert statement for the table
-  abstract protected function getInsertStatement($object);
+  abstract protected function getInsertStatement();
 
-  // The insert statement for the table
-  abstract protected function getUpdateStatement($object);
+  abstract protected function getUpdateStatement();
+
+  abstract protected function getDeleteStatement();
   
   public function findAll() {
     $sql = $this->getSelectStatement();
@@ -30,23 +30,23 @@ abstract class DAO
   }
 
   public function findByID($id) {
-    $sql = $this->getSpecificSelectStatement($id);
-    $resultArr = $this->dbAdapter->fetchAsArray($sql);
+    $sql = $this->getSpecificSelectStatement();
+    $resultArr = $this->dbAdapter->fetchAsArrayByID($sql, $id);
     return $resultArr;
   }
 
   public function insert($object) {
-    $sql = $this->getInsertStatement($object);
-    return $this->dbAdapter->runQueryGetLastInsertID($sql); //returns id of most recent insert
+    $sql = $this->getInsertStatement();
+    return $this->dbAdapter->runQueryWithParamsGetLastInsertID($sql, $object->toArray(), $object->getTypes()); //returns id of most recent insert
   }
 
   public function update($object) {
-    $sql = $this->getUpdateStatement($object);
-    $this->dbAdapter->runQuery($sql);
+    $sql = $this->getUpdateStatement();
+    $this->dbAdapter->runQueryWithParams($sql, $object->toArrayIDLast(), $object->getTypes());
   }
 
   public function delete($id) {
-    $sql = $this->getDeleteStatement($id);
-    $this->dbAdapter->runQuery($sql);
+    $sql = $this->getDeleteStatement();
+    $this->dbAdapter->runQueryWithID($sql, $id);
   }
 }
