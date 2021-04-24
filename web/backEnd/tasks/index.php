@@ -56,9 +56,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
             }
         } else {
             $resultArr = $taskDAO->findAll();
-            if (!$resultArr) {  // If the database is empty, throw the corresponding response code
-                http_response_code(404);
-            } else {  // Otherwise, echo the results from the database
+            if ($resultArr) {  // If the database is empty, throw the corresponding response code
                 http_response_code(200);
                 echo json_encode($resultArr);
             }

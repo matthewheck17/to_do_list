@@ -1,6 +1,6 @@
 <?php
 
-include "DatabaseAdapterInterface.php";
+require_once("DatabaseAdapterInterface.php");
 
 
 class DatabaseAdapterMySQLI implements DatabaseAdapterInterface
@@ -26,6 +26,29 @@ class DatabaseAdapterMySQLI implements DatabaseAdapterInterface
     return $result;
   }
 
+  public function runQueryWithID($sql, $id) {
+
+    $stmt = $this->mysqli->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result;
+  }
+
+  public function runQueryWithParams($sql, $params, $types) {
+    $stmt = $this->mysqli->prepare($sql);
+    $stmt->bind_param($types, ...$params);
+    $stmt->execute();
+  }
+
+  public function runQueryWithParamsGetLastInsertID($sql, $params, $types) {
+    $stmt = $this->mysqli->prepare($sql);
+    $stmt->bind_param($types, ...$params);
+    $stmt->execute();
+    $id = mysqli_insert_id($this->mysqli); //get id of most recent insert
+    return $id;
+  }
+
   public function fetchAsArray($sql) {
     $result = $this->mysqli->query($sql);
     $resultArr = array();
@@ -35,10 +58,15 @@ class DatabaseAdapterMySQLI implements DatabaseAdapterInterface
     return $resultArr;
   }
 
-  public function runQueryGetLastInsertID($sql) {
-    $this->mysqli->query($sql);
-    $id = mysqli_insert_id($this->mysqli); //get id of most recent insert
-    return $id;
+  public function fetchAsArrayByID($sql, $id) {
+    $stmt = $this->mysqli->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $resultArr = array();
+    while ($row = $result->fetch_assoc()){
+      array_push($resultArr, $row);
+    }
+    return $resultArr;
   }
-
 }

@@ -1,6 +1,8 @@
 <?php 
 
-class Task {
+require_once("Obj.class.php");
+
+class Task extends Obj{
     private $task_id;
     private $title;
     private $content;
@@ -27,5 +29,14 @@ class Task {
 
     public function getCompleted(){
         return $this->completed;
+    }
+
+    public function toArrayIDLast(){
+        $arr = [];
+        array_push($arr, $this->title);
+        array_push($arr, $this->content);
+        array_push($arr, $this->completed);
+        array_push($arr, $this->task_id);
+        return $arr;
     }
 }

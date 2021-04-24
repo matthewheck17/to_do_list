@@ -10,32 +10,25 @@ class TaskDAO extends DAO {
         return "SELECT * FROM tasks";
     }
 
-    protected function getSpecificSelectStatement($taskID)
-    {
-        return "SELECT * FROM tasks WHERE task_id=" . $taskID;
+    protected function getSpecificSelectStatement()
+    {   
+        return "SELECT * FROM tasks WHERE task_id=?";
     }
 
-    protected function getInsertStatement($taskObj)
+    protected function getInsertStatement()
     {
-        if (is_a($taskObj, 'Task')){
-            return 'INSERT INTO tasks (title,content) VALUES ("' . $taskObj->getTitle() . '","' . $taskObj->getContent() . '")';
-        } else {
-            throw new Exception('Is not a task object');
-        }
+
+        return 'INSERT INTO tasks (title,content) VALUES (?,?)';
     }
 
-    protected function getUpdateStatement($taskObj)
+    protected function getUpdateStatement()
     {
-        if (is_a($taskObj, 'Task')){
-            return 'UPDATE tasks SET title = "' . $taskObj->getTitle() .'", content = "' . $taskObj->getContent() .'", completed = "' . $taskObj->getCompleted() .'" WHERE task_id="' . $taskObj->getID() .'"';
-        } else {
-            throw new Exception('Is not a task object');
-        }
+        return 'UPDATE tasks SET title = ?, content = ?, completed = ? WHERE task_id=?';
     }
 
-    protected function getDeleteStatement($taskID)
+    protected function getDeleteStatement()
     {
-        return "DELETE FROM tasks WHERE task_id=" . $taskID;
+        return "DELETE FROM tasks WHERE task_id=?";
     }
 
 
