@@ -57,4 +57,33 @@ window.onload = function() {
     // Sends the data
     xhr.send(data);
   }
+  function getJSON(url, callback) {
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'json';
+
+    xhr.onload = function() {
+
+      var status = xhr.status;
+
+      if (status == 200) {
+        callback(null, xhr.response);
+      } else {
+        callback(status);
+      }
+    };
+
+    xhr.send();
+  };
+
+  getJSON('/to_do_list/web/backEnd/tasks/',  function(err, data) {
+    if (err != null) {
+      console.error(err);
+    } else {
+      data.forEach(function(o) {
+        document.getElementById("myTable").innerHTML += '<tr><td>' + o.title + '</td><td>' + o.content + '</td></tr>';
+      });
+    }
+  });
 }
