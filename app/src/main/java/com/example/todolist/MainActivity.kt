@@ -2,6 +2,7 @@ package com.example.todolist
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.ListView
 import android.widget.Toast
@@ -35,7 +36,6 @@ class MainActivity : AppCompatActivity(), TaskAdapter.TaskListener {
                 home.visibility = View.VISIBLE
                 adapter.setData(it as ArrayList<Task>)
                 it.reverse() // Most recent task is listed first.
-                it.add(1, Task(1))
             }
             else {
                 showToast("There are currently no tasks.")
@@ -104,10 +104,21 @@ class MainActivity : AppCompatActivity(), TaskAdapter.TaskListener {
 
     override fun onItemDeleted(task: Task, position: Int) {
 
+        Log.d("myTag", "TESTING delete")
         task.task_id?.let { vm.deleteTask(it) }
         vm.deleteTaskLiveData?.observe(this, Observer {
             if (it != null) {
                 adapter.removeTask(position)
+            }
+        })
+    }
+
+    override fun onItemCompleted(task: Task, position: Int) {
+        task.complete()
+        task.task_id?.let { vm.editTask(task) }
+        vm.editTaskLiveData?.observe(this, Observer {
+            if (it != null) {
+                adapter.editTask(task)
             }
         })
     }
