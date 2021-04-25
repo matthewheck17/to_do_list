@@ -17,6 +17,7 @@ class TaskAdapter (var listener:TaskListener) : RecyclerView.Adapter<TaskAdapter
     // which task to delete
     interface TaskListener {
         fun onItemDeleted(task: Task, position: Int)
+        fun onItemCompleted(task: Task, position: Int)
     }
 
     fun setData(list: ArrayList<Task>) {
@@ -40,6 +41,12 @@ class TaskAdapter (var listener:TaskListener) : RecyclerView.Adapter<TaskAdapter
         holder.itemView.delete.setOnClickListener {
             item?.let { it1 ->
                 listener.onItemDeleted(it1, position)
+            }
+        }
+
+        holder.itemView.checkBox.setOnClickListener {
+            item?.let { it1 ->
+                listener.onItemCompleted(it1, position)
             }
         }
     }
