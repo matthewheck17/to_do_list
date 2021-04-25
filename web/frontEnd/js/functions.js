@@ -7,7 +7,7 @@ class Task {
   }
 
   toHTML() {
-    return '<tr class="task"><td class="tableRow">' + this.title + '</td><td id="content">' + this.content + '</td><td class="buttons"><button type="button" name="button" onclick="deleteTask('+this.id+')" class="deleteBtn" id="deleteBtn"><i class="fas fa-trash-alt"></i></button><button id="'+this.id+'-complete" type="button" name="button" class="completeBtn"><i class="fas fa-check"></i></button><button type="button" name="button" onclick="" class="editBtn"><i class="fas fa-edit"></i></button></td></tr>';
+    return '<tr class="task"><td class="tableRow">' + this.title + '</td><td id="content">' + this.content + '</td><td class="buttons"><button id="'+this.id+'-delete" type="button" name="button" class="deleteBtn" id="deleteBtn"><i class="fas fa-trash-alt"></i></button><button id="'+this.id+'-complete" type="button" name="button" class="completeBtn"><i class="fas fa-check"></i></button><button type="button" name="button" onclick="" class="editBtn"><i class="fas fa-edit"></i></button></td></tr>';
       
         //still need to look into these below
         //document.getElementById("myTable").innerHTML += '<input type="text" name="editTitle" id="editTitle" value="" placeholder="'+o.title+'"><input type="text" name="editContent" id="editContent" placeholder="'+o.content+'" value=""><button type="button" name="button" onclick="editForm('+o.task_id+')" class="submitBtn">Submit</button>';
@@ -39,6 +39,8 @@ function populateTasks (json) {
   json.forEach(element => {
     task = new Task (element.task_id, element.title, element.content, element.completed);
     document.getElementById("myTable").innerHTML += task.toHTML();
+    console.log(document.getElementById(element.task_id + "-delete").addEventListener("click", function(){ deleteTask(task.id); }));
+    document.getElementById(element.task_id + "-delete").addEventListener("click", function(){ deleteTask(task.id); });
     document.getElementById(element.task_id + "-complete").addEventListener("click", function(){ completeTask(task); });
   });
 }
@@ -55,7 +57,7 @@ function deleteTask(id) {
   xhr.open("DELETE", url, true);
 
   xhr.send();
-  document.getElementById("myTable").innerHTML = "";
+  document.getElementById("myTable").innerHTML = "<tr><th>Task Title</th><th>Task Description</th></tr>";
   dispatchEvent(new Event('load'));
 }
 
