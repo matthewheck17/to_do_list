@@ -122,6 +122,7 @@ window.onload = function() {
         // Ternary operator that strikes through completed tasks
         document.getElementById("myTable").innerHTML += '<tr id="title"><td id="tableRow">' + o.title + '</td><td id="content">' + o.content + '</td><button type="button" name="button" onclick="deleteTask('+o.task_id+')" class="deleteBtn" id="deleteBtn"><i class="fas fa-trash-alt"></i></button><button type="button" name="button" onclick="completeTask('+ o.title +','+ o.content +')" class="completeBtn"><i class="fas fa-check"></i></button><button type="button" name="button" onclick="" class="editBtn"><i class="fas fa-edit"></i></button></tr>';
         document.getElementById("myTable").innerHTML += '<input type="text" name="editTitle" id="editTitle" value="" placeholder="'+o.title+'"><input type="text" name="editContent" id="editContent" placeholder="'+o.content+'" value=""><button type="button" name="button" onclick="editForm('+o.task_id+')" class="submitBtn">Submit</button>';
+        document.getElementById("myTable").innerHTML += '<i class="fas fa-caret-square-down" id="actions">More actions</i>'
       });
 
     }

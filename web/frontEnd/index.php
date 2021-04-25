@@ -21,7 +21,7 @@
 
   </div>
   <button type="button" name="button" onclick="showForm('formElement')" class="showBtn">Add Task</button>
-  <button type="button" name="button" onclick="getJSON()" class="refreshBtn">Refresh</button>
+  <button type="button" name="button" onclick="" class="refreshBtn">Refresh</button>
   <div id="results">
     <table id="myTable" class="myClass">
       <tr>
