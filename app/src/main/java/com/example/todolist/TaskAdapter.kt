@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.R
 import com.example.todolist.Task
+import kotlinx.android.synthetic.main.activity_task_description.view.*
 import kotlinx.android.synthetic.main.homeview.view.*
+import kotlinx.android.synthetic.main.homeview.view.taskTitle
 
 class TaskAdapter (var listener:TaskListener) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
@@ -49,6 +51,22 @@ class TaskAdapter (var listener:TaskListener) : RecyclerView.Adapter<TaskAdapter
                 listener.onItemCompleted(it1, position)
             }
         }
+
+        /* User clicks on title to change
+        holder.itemView.title.setOnClickListener {
+            item?.let { it1 ->
+                listener.onItemCompleted(it1, position)
+            }
+        }
+
+        // User clicks on content to change
+        holder.itemView.content.setOnClickListener {
+            item?.let { it1 ->
+                listener.onItemCompleted(it1, position)
+            }
+        }
+
+         */
     }
 
     fun addTask(task: Task) {
@@ -72,8 +90,8 @@ class TaskAdapter (var listener:TaskListener) : RecyclerView.Adapter<TaskAdapter
 
     class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         fun bindView(item: Task?) {
-            itemView.Tasktitle.text = item?.title
-            itemView.content.text = item?.content
+            itemView.taskTitle.text = item?.title
+            itemView.taskContent.text = item?.content
         }
     }
 }

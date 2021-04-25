@@ -42,10 +42,11 @@ class TaskRepository     {
         return data
     }
 
-    fun createTask(task: Task):LiveData<Task>{
+    fun createTask(task: Task):LiveData<Task> {
+
         val data = MutableLiveData<Task>()
 
-        taskInterface?.createTask(task)?.enqueue(object : Callback<Task>{
+        taskInterface?.createTask(task)?.enqueue(object : Callback<Task> {
             override fun onFailure(call: Call<Task>, t: Throwable) {
                 data.value = null
             }
@@ -65,19 +66,18 @@ class TaskRepository     {
     }
 
     fun editTask(task: Task):LiveData<Task> {
-        val data = MutableLiveData<Task>()
 
-        Log.d("myTag", task.getID().toString())
+        val data = MutableLiveData<Task>()
         task.complete()
 
-        taskInterface?.editTask(task.getID(), task)?.enqueue(object : Callback<Task>{
+        taskInterface?.editTask(task.getID(), task)?.enqueue(object : Callback<Task> {
+
             override fun onFailure(call: Call<Task>, t: Throwable) {
                 data.value = null
-                Log.d("myTag", "test")
             }
+
             override fun onResponse(call: Call<Task>, response: Response<Task>) {
                 val res = response.body()
-                Log.d("myTag", response.code().toString())
                 if (response.code() == 201 && res!=null){
                     data.value = res
                 }else{

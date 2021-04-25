@@ -10,6 +10,8 @@
         android:layout_height="wrap_content"
         android:hint="Title: "
         android:id="@+id/title"
+        android:inputType="none"
+        android:focusable="true"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -19,6 +21,8 @@
         android:layout_height="wrap_content"
         android:hint="Content: "
         android:id="@+id/content"
+        android:inputType="none"
+        android:focusable="true"
         app:layout_constraintTop_toBottomOf="@+id/title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
