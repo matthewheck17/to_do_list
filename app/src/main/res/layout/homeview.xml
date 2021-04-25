@@ -15,7 +15,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/Tasktitle"
+            android:id="@+id/taskTitle"
             android:textColor="@android:color/black"
             android:textStyle="bold"
             android:textSize="16sp"
@@ -25,11 +25,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/content"
+            android:id="@+id/taskContent"
             android:textColor="@android:color/darker_gray"
             android:textStyle="normal"
             android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@+id/Tasktitle"
+            app:layout_constraintTop_toBottomOf="@+id/taskTitle"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="10dp"/>
 
