@@ -18,6 +18,7 @@ ul {
 table {
   border-collapse: collapse;
   width: 100%;
+  table-layout: fixed;
 }
 
 td, th {
@@ -26,11 +27,7 @@ td, th {
   padding: 8px;
 }
 
-#editTask, #editTitle, #editDesc, #deleteTask {
-  display: none;
-}
-
-#editTitle, #editDesc {
+#editTitle, #editContent {
   width: 25%;
 }
 
@@ -46,6 +43,10 @@ table td:hover, table tr:hover {
 
 table th {
   background: white;
+}
+
+#deleteBtn, .completeBtn, .editBtn {
+  float: left;
 }
 
 /* Shows the edit button on hover */
