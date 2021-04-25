@@ -15,6 +15,6 @@ interface TaskInterface {
     @PUT("index.php")
     fun editTask(@Body task: Task):Call<Task>
 
-     @DELETE("index.php/{id}")
-    fun deleteTask(@Path("id") id:Int):Call<String>
+    @DELETE("index.php/?")
+    fun deleteTask(@Query("id") id:Int):Call<String>
 }
