@@ -6,4 +6,12 @@ data class Task(
     var title: String?="",
     var content : String?="",
     var completed : Boolean?=false) {
+
+    fun getID() : Int? {
+        return task_id
+    }
+
+    fun complete() {
+        completed = true
+    }
 }
