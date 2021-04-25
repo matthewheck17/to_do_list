@@ -36,7 +36,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         if (!$taskDAO->findByID($_GET["id"])) { //if the id does not exist in the DB
             http_response_code(404);
         } else {
-            if (!empty($data->title) && !empty($data->content) && !empty($data->completed)) { //check that the title and content are not empty
+            if (isset($data->title) && isset($data->content) && isset($data->completed)) { //check that the title and content are not empty
                 $updatedTask = new Task($_GET["id"], $data->title, $data->content, $data->completed);
                 $taskDAO->update($updatedTask);
                 http_response_code(200);
