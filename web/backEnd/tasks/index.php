@@ -5,6 +5,7 @@ require_once("../db/TaskDAO.class.php");
 require_once("../data-classes/Task.class.php");
 
 header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
 
 $connectionValues = array("localhost", "root", "root", "to_do_list");
 $adapter = new DatabaseAdapterMySQLI($connectionValues);
