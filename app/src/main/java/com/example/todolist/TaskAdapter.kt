@@ -38,7 +38,7 @@ class TaskAdapter (var listener:TaskListener) : RecyclerView.Adapter<TaskAdapter
         return data?.size ?: 0
     }
 
-    // Set an onclick listener on the cancel button and call this callback
+    // Set an onclick listener on the delete and edit button and call this callback
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val item = data?.get(position)
         holder.bindView(item)

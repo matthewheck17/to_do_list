@@ -7,7 +7,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class TaskRepository     {
+// Contains the functions to get all tasks,
+// create a task, delete a task, and edit
+// a task.
+class TaskRepository {
 
     private var taskInterface:TaskInterface?=null
 

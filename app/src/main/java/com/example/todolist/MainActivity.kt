@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity(), TaskAdapter.TaskListener {
         var title = ""
         var content = ""
 
-            view.btn_submit.setOnClickListener {
+        view.btn_submit.setOnClickListener {
             title = view.title.text.toString().trim()
             content = view.content.text.toString().trim()
 
@@ -82,9 +82,9 @@ class MainActivity : AppCompatActivity(), TaskAdapter.TaskListener {
                 vm.createTask(task)
 
                 vm.createTaskLiveData?.observe(this, Observer {
-                        adapter.addTask(task)
+                        adapter.addTask(task) // Adding task to list
                         home.smoothScrollToPosition(0)
-                    dialog.cancel()
+                        dialog.cancel()
                 })
             }
             else {
@@ -120,6 +120,7 @@ class MainActivity : AppCompatActivity(), TaskAdapter.TaskListener {
 
         task.complete()
         task.title?.let { vm.editTask(task) }
+        task.content?.let { vm.editTask(task)}
         vm.editTaskLiveData?.observe(this, Observer {
             if (it != null) {
                 adapter.editTask(task)
