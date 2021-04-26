@@ -25,6 +25,7 @@ td, th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+  word-break: break-word;
 }
 
 #editTitle, #editContent {
@@ -92,7 +93,8 @@ input {
   transition: 0.3s;
   border-radius: 0;
 }
-.showBtn, .refreshBtn {
+
+.home-button {
   width: 100%;
   background: #d9d9d9;
   text-align: center;
@@ -100,6 +102,24 @@ input {
   font-size: 20px;
   transition: 0.3s;
   border-radius: 0;
+}
+
+.home-button:hover {
+  background-color: #c1c1c1; 
+}
+
+#filter-container {
+  background: #d9d9d9;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.filter-button {
+  text-align: center;
+  font-size: 20px;
+  border-radius: 0;
+  flex: 1; 
 }
 
 /* Styles the Add Button */
@@ -110,4 +130,49 @@ input {
 /* Styles the Show/hide button */
 .showBtn:hover {
   background-color: #bbb;
+}
+
+.edit-title {
+  padding-right: 35px;
+}
+
+.edit-content {
+  padding-right: 35px;
+}
+
+.editBtn {
+  position: absolute;
+  margin-left: -31px;
+  margin-top: -3px;
+  padding: 12px 9px;
+}
+
+.add-task-btn {
+  position: absolute;
+  margin-top: -22px;
+  padding: 12px 14px;
+}
+
+#show-all {
+  background-color: #90d0ee;
+}
+
+#show-all:hover {
+  background-color: #6ca1b9;
+}
+
+#show-inc {
+  background-color: #ee9090;
+}
+
+#show-inc:hover {
+  background-color: #b45b5b;
+}
+
+#show-comp {
+  background-color: #90ee90;
+}
+
+#show-comp:hover {
+  background-color: #81c281;
 }

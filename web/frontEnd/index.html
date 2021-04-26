@@ -20,16 +20,33 @@
     </form>
 
   </div>
-  <!-- ADD TASK NEEDS REFACTORING -->
-  <button type="button" name="button" onclick="showForm('formElement')" class="showBtn">Add Task</button>
-  <button type="button" name="button" onclick="reloadTasks()" class="refreshBtn">Refresh</button>
+  <button class="home-button" type="button" name="button" onclick="showAddTaskForm()" class="showBtn">Add Task</button>
+  <button class="home-button" type="button" name="button" onclick="reloadTasks()" class="refreshBtn">Refresh</button>
+  <div id="filter-container">
+    <button class="filter-button" id="show-all" type="button" name="button" onclick="showAll()" class="refreshBtn">Show All</button>
+    <button class="filter-button" id="show-inc" type="button" name="button" onclick="showIncomplete()" class="refreshBtn">Show Incomplete</button>
+    <button class="filter-button" id="show-comp" type="button" name="button" onclick="showComplete()" class="refreshBtn">Show Completed</button>
+  </div>
   <div id="results">
     <table id="myTable" class="myClass">
       <tr>
         <th>Task Title</th>
         <th>Task Description</th>
       </tr>
-      <!-- Populated using the window.onload method -->
+      <!-- Tasks populated here using the window.onload method -->
+      <tr id="add-task-row" style="display:none;">
+        <td id="title-add" class="tableRow">
+          <input type="text" class="edit-title" id="add-title" name="add-title">
+        </td>
+        <td id="content-add" class="tableRow">
+          <input type="text" class="edit-content" id="add-content" name="add-content">
+        </td>
+        <td class="tableRow">
+          <button type="button" name="finish-add-task-button" onclick="addTask()" class="add-task-btn">
+            <i class="fas fa-check"></i>
+          </button>
+        </td>
+      </tr>
     </table>
   </div>
   </body>
