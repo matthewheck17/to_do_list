@@ -7,6 +7,7 @@ class Task {
   }
 
   toHTML() {
+    // If the task is completed, display with a line through it
     if (task.completed == "1") {
       return `<tr class="task">
                 <td id="`+this.id+`-title" class="tableRow" style="text-decoration: line-through;" onclick=startEditingTitle(`+this.id+`)>` + this.title + `</td>
@@ -65,16 +66,19 @@ class Task {
 
 var filter = "all";
 
+// Function for displaying all of the tasks regardless of filter
 function showAll() {
   filter = "all";
   reloadTasks();
 }
 
+// Function for displaying all the tasks with the filter of complete
 function showComplete() {
   filter = "complete";
   reloadTasks();
 }
 
+// Function for displaying all the tasks with the filter of incomplete
 function showIncomplete() {
   filter = "incomplete";
   reloadTasks();
@@ -98,10 +102,10 @@ window.addEventListener('load', (event) => {
       }
     }
   };
-
   xhr.send();
 });
 
+// Populates the tasks on the front page according to the filter selected
 function populateTasks (json) {
   let htmlToAdd = "";
   json.forEach(element => {
@@ -126,9 +130,9 @@ function populateTasks (json) {
   });
 }
 
-
 const BASEURL =  "/to_do_list/web/backEnd/tasks/"
 
+// Function for creating tasks based on the task object
 function createTask(task) {
   let xhr = new XMLHttpRequest();
 
@@ -152,7 +156,7 @@ function createTask(task) {
   xhr.send(data);
 }
 
-
+// Function for deleting tasks based on the ID
 function deleteTask(id) {
   let xhr = new XMLHttpRequest();
   let url = BASEURL + "?id=" + id;
@@ -197,6 +201,7 @@ function updateTask(task) {
   xhr.send(data);
 }
 
+// Function for completing tasks by ID
 function completeTask(id) {
   let task = createTaskFromID(id);
   task.completed = task.completed=="1" ? "0" : "1";
@@ -287,9 +292,10 @@ function addTask() {
     createTask(task);
 
   }
-  
+
 }
 
+// Function for reloading the task population without reloading the entire page
 function reloadTasks() {
   setTimeout(function(){},)
   document.getElementById("myTable").innerHTML = `<tr>
@@ -311,5 +317,3 @@ function reloadTasks() {
                                                   </tr>`;
   dispatchEvent(new Event('load'));
 }
-
-      
