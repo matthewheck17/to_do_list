@@ -11,12 +11,15 @@ import kotlinx.android.synthetic.main.activity_task_description.view.*
 import kotlinx.android.synthetic.main.homeview.view.*
 import kotlinx.android.synthetic.main.homeview.view.taskTitle
 
+
+// Custom TaskAdapter class binds data with RecycleView
 class TaskAdapter (var listener:TaskListener) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     private var data : ArrayList<Task>?=null
 
     // Listener that tells our Main Activity
-    // which task to delete
+    // which task to delete and which task
+    // is complete.
     interface TaskListener {
         fun onItemDeleted(task: Task, position: Int)
         fun onItemCompleted(task: Task, position: Int)
@@ -46,27 +49,11 @@ class TaskAdapter (var listener:TaskListener) : RecyclerView.Adapter<TaskAdapter
             }
         }
 
-        holder.itemView.checkBox.setOnClickListener {
+        holder.itemView.edit.setOnClickListener {
             item?.let { it1 ->
                 listener.onItemCompleted(it1, position)
             }
         }
-
-        /* User clicks on title to change
-        holder.itemView.title.setOnClickListener {
-            item?.let { it1 ->
-                listener.onItemCompleted(it1, position)
-            }
-        }
-
-        // User clicks on content to change
-        holder.itemView.content.setOnClickListener {
-            item?.let { it1 ->
-                listener.onItemCompleted(it1, position)
-            }
-        }
-
-         */
     }
 
     fun addTask(task: Task) {

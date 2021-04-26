@@ -4,6 +4,10 @@ import com.example.todolist.Task
 import retrofit2.Call
 import retrofit2.http.*
 
+
+// Endpoints are defined inside this interface using
+// special Retrofit annotations to encode details about
+// the parameters and request method.
 interface TaskInterface {
 
     @GET("index.php")

@@ -15,6 +15,8 @@ class TaskRepository     {
         taskInterface = TaskClient.getClient().create(TaskInterface::class.java)
     }
 
+    // Function to fetch all of the tasks.
+    // Called when the page first loads.
     fun getAllTasks(): LiveData<List<Task>> {
         val data = MutableLiveData<List<Task>>()
 
@@ -42,11 +44,11 @@ class TaskRepository     {
         return data
     }
 
-    fun createTask(task: Task):LiveData<Task> {
-
+    // Function to create a task
+    fun createTask(task: Task):LiveData<Task>{
         val data = MutableLiveData<Task>()
 
-        taskInterface?.createTask(task)?.enqueue(object : Callback<Task> {
+        taskInterface?.createTask(task)?.enqueue(object : Callback<Task>{
             override fun onFailure(call: Call<Task>, t: Throwable) {
                 data.value = null
             }
@@ -65,17 +67,16 @@ class TaskRepository     {
         return data
     }
 
+    // Function to edit a task
     fun editTask(task: Task):LiveData<Task> {
 
         val data = MutableLiveData<Task>()
         task.complete()
 
         taskInterface?.editTask(task.getID(), task)?.enqueue(object : Callback<Task> {
-
             override fun onFailure(call: Call<Task>, t: Throwable) {
                 data.value = null
             }
-
             override fun onResponse(call: Call<Task>, response: Response<Task>) {
                 val res = response.body()
                 if (response.code() == 201 && res!=null){
@@ -90,6 +91,7 @@ class TaskRepository     {
     }
 
 
+    // Function to delete a task
     fun deleteTask(task_id:Int):LiveData<Boolean>{
         val data = MutableLiveData<Boolean>()
 

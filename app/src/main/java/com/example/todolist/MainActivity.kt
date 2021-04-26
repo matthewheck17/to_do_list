@@ -3,28 +3,24 @@ package com.example.todolist
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
-import android.os.Handler
-import android.util.Log
 import android.view.*
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_task_description.view.*
-
+import kotlinx.android.synthetic.main.homeview.*
+import kotlinx.android.synthetic.main.homeview.view.*
 
 class MainActivity : AppCompatActivity(), TaskAdapter.TaskListener {
 
     private lateinit var vm:TaskViewModel
     private lateinit var adapter: TaskAdapter
 
+    // Initialize our Recyclerview Adapter and display the fetched result.
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -41,12 +37,10 @@ class MainActivity : AppCompatActivity(), TaskAdapter.TaskListener {
                 adapter.setData(it as ArrayList<Task>)
                 it.reverse() // Most recent task is listed first.
             }
-            else {
-                showToast("There are currently no tasks.")
-            }
-            progress_home.visibility = View.GONE
-        })
+            progress_home.visibility = View.GONE // Loading screen is now gone
 
+
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -54,6 +48,8 @@ class MainActivity : AppCompatActivity(), TaskAdapter.TaskListener {
         return true
     }
 
+    // When the menu is selected, users are able to create
+    // a new task.
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.menu_create_task -> showCreateTaskDialog()
@@ -61,6 +57,9 @@ class MainActivity : AppCompatActivity(), TaskAdapter.TaskListener {
         return true
     }
 
+    // CreateTaskDialog contains the task title
+    // and task content. User must include both
+    // to create a new task.
     private fun showCreateTaskDialog() {
 
         val dialog = Dialog(this)
@@ -101,6 +100,7 @@ class MainActivity : AppCompatActivity(), TaskAdapter.TaskListener {
 
 
     private fun initAdapter() {
+
         adapter = TaskAdapter(this)
         home.layoutManager = LinearLayoutManager(this)
         home.adapter = adapter
@@ -119,13 +119,20 @@ class MainActivity : AppCompatActivity(), TaskAdapter.TaskListener {
     override fun onItemCompleted(task: Task, position: Int) {
 
         task.complete()
-        task.task_id?.let { vm.editTask(task) }
+        task.title?.let { vm.editTask(task) }
         vm.editTaskLiveData?.observe(this, Observer {
             if (it != null) {
                 adapter.editTask(task)
             }
         })
     }
+
+    private fun showToast(msg: String) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+    }
+}
+
+/*
 
      private fun updateTask() {
 
@@ -157,8 +164,4 @@ class MainActivity : AppCompatActivity(), TaskAdapter.TaskListener {
         kb.showSoftInput(title, 0)
         kb.showSoftInput(content, 0)
     }
-
-    private fun showToast(msg: String) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-    }
-}
+ */

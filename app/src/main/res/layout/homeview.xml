@@ -44,12 +44,24 @@
             android:padding="10dp"/>
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/taskCheckbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
             app:layout_constraintEnd_toStartOf="@+id/delete"
             app:layout_constraintTop_toTopOf="@+id/delete" />
+
+        <ImageView
+            android:id="@+id/edit"
+            android:layout_width="51dp"
+            android:layout_height="43dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="100dp"
+            android:layout_marginRight="100dp"
+            android:padding="10dp"
+            android:src="@drawable/edit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
