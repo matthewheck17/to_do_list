@@ -8,9 +8,9 @@ class Task {
 
   toHTML() {
     if (task.completed == "1") {
-      return '<tr class="task"><td id="'+this.id+'-title" class="tableRow" style="text-decoration: line-through;">' + this.title + '</td><td id="'+this.id+'-content" style="text-decoration: line-through;">' + this.content + '</td><td id="'+this.id+'-completed" style="display:none;" class="tableRow">' + this.completed + '</td><td class="buttons"><button id="'+this.id+'-delete" type="button" name="button" class="deleteBtn" id="deleteBtn"><i class="fas fa-trash-alt"></i></button><button id="'+this.id+'-complete" type="button" name="button" class="completeBtn" onclick=completeTask(' + this.id +')><i class="fas fa-check"></i></button><button type="button" name="button" onclick="" class="editBtn"><i class="fas fa-edit"></i></button></td></tr>';
+      return '<tr class="task"><td id="'+this.id+'-title" class="tableRow" style="text-decoration: line-through;">' + this.title + '</td><td id="'+this.id+'-content" style="text-decoration: line-through;">' + this.content + '</td><td id="'+this.id+'-completed" style="display:none;" class="tableRow">' + this.completed + '</td><td class="buttons"><button id="'+this.id+'-delete" type="button" name="button" class="deleteBtn" id="deleteBtn" onclick=deleteTask(' + this.id +')><i class="fas fa-trash-alt"></i></button><button id="'+this.id+'-complete" type="button" name="button" class="completeBtn" onclick=completeTask(' + this.id +')><i class="fas fa-check"></i></button><button type="button" name="button" onclick="" class="editBtn"><i class="fas fa-edit"></i></button></td></tr>';
     } else {
-      return '<tr class="task"><td id="'+this.id+'-title" class="tableRow">' + this.title + '</td><td id="'+this.id+'-content">' + this.content + '</td><td id="'+this.id+'-completed" style="display:none;" class="tableRow">' + this.completed + '</td><td class="buttons"><button id="'+this.id+'-delete" type="button" name="button" class="deleteBtn" id="deleteBtn"><i class="fas fa-trash-alt"></i></button><button id="'+this.id+'-complete" type="button" name="button" class="completeBtn" onclick=completeTask(' + this.id +')><i class="fas fa-check"></i></button><button type="button" name="button" onclick="" class="editBtn"><i class="fas fa-edit"></i></button></td></tr>';
+      return '<tr class="task"><td id="'+this.id+'-title" class="tableRow">' + this.title + '</td><td id="'+this.id+'-content">' + this.content + '</td><td id="'+this.id+'-completed" style="display:none;" class="tableRow">' + this.completed + '</td><td class="buttons"><button id="'+this.id+'-delete" type="button" name="button" class="deleteBtn" id="deleteBtn" onclick=deleteTask(' + this.id +')><i class="fas fa-trash-alt"></i></button><button id="'+this.id+'-complete" type="button" name="button" class="completeBtn" onclick=completeTask(' + this.id +')><i class="fas fa-check"></i></button><button type="button" name="button" onclick="" class="editBtn"><i class="fas fa-edit"></i></button></td></tr>';
     }
 
         //still need to look into these below
@@ -48,9 +48,6 @@ function populateTasks (json) {
   json.forEach(element => {
     task = new Task (element.task_id, element.title, element.content, element.completed);
     document.getElementById("myTable").innerHTML += task.toHTML();
-    document.getElementById(element.task_id + "-delete").onclick = function(){ deleteTask(task.id); };
-    document.getElementById(element.task_id + "-complete").onclick = function () { completeTask(task); };
-    //document.getElementById(element.task_id + "-complete").addEventListener("click", function(){ completeTask(task); });
   });
 }
 
