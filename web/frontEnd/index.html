@@ -4,6 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8"/>
   <title>To-Do List</title>
+  <link rel="shortcut icon" type="image/jpg" href="css/assets/favicon.ico"/>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
   <script type="text/javascript" src="js/functions.js"></script>
@@ -20,12 +21,12 @@
     </form>
 
   </div>
-  <button class="home-button" type="button" name="button" onclick="showAddTaskForm()" class="showBtn">Add Task</button>
-  <button class="home-button" type="button" name="button" onclick="reloadTasks()" class="refreshBtn">Refresh</button>
+  <button class="home-button" type="button" name="button" onclick="showAddTaskForm()">Add Task</button>
+  <button class="home-button" type="button" name="button" onclick="reloadTasks()">Refresh</button>
   <div id="filter-container">
-    <button class="filter-button" id="show-all" type="button" name="button" onclick="showAll()" class="refreshBtn">Show All</button>
-    <button class="filter-button" id="show-inc" type="button" name="button" onclick="showIncomplete()" class="refreshBtn">Show Incomplete</button>
-    <button class="filter-button" id="show-comp" type="button" name="button" onclick="showComplete()" class="refreshBtn">Show Completed</button>
+    <button class="filter-button" id="show-all" type="button" name="button" onclick="showAll()">Show All</button>
+    <button class="filter-button" id="show-inc" type="button" name="button" onclick="showIncomplete()">Show Incomplete</button>
+    <button class="filter-button" id="show-comp" type="button" name="button" onclick="showComplete()">Show Completed</button>
   </div>
   <div id="results">
     <table id="myTable" class="myClass">
