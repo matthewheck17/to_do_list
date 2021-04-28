@@ -6,6 +6,8 @@ require_once("../data-classes/Task.class.php");
 
 header('Content-Type: application/json');
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: DELETE, POST, GET, PUT, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
 $connectionValues = array("localhost", "root", "root", "to_do_list");
 $adapter = new DatabaseAdapterMySQLI($connectionValues);
@@ -75,6 +77,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
         } else {
             http_response_code(400);
         }
+        break;
+    case 'OPTIONS':
+        http_response_code(200);
         break;
     default:
         http_response_code(400);
