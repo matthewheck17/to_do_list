@@ -9,7 +9,11 @@ import java.util.concurrent.TimeUnit
 
 // Network class that helps us handle APIs
 
-const val BASEURL = "https://www.matthewheck.me/to_do_list/tasks/"
+//const val BASEURL = "https://www.matthewheck.me/to_do_list/tasks/"
+const val BASEURL = "http://10.0.2.2/backEnd/tasks/"
+
+
+
 class TaskClient {
 
     companion object {

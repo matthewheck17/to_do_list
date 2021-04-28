@@ -91,7 +91,7 @@ function createTaskFromID(id) {
 
 window.addEventListener('load', (event) => {
   let xhr = new XMLHttpRequest();
-  xhr.open("GET", "http://localhost:8080/to_do_list/web/backEnd/tasks/", true);
+  xhr.open("GET", BASEURL, true);
 
   xhr.onload = (e) => {
     if (xhr.readyState === 4) {
@@ -130,7 +130,7 @@ function populateTasks (json) {
   });
 }
 
-const BASEURL =  "/to_do_list/web/backEnd/tasks/"
+const BASEURL =  "http://localhost/backEnd/tasks/"
 
 // Function for creating tasks based on the task object
 function createTask(task) {
